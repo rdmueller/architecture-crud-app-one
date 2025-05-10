@@ -1,0 +1,243 @@
+### Architecture CRUD API Examples
+### Base URL: http://localhost:8000
+
+### Health Check
+GET http://localhost:8000/health
+
+### Root Endpoint
+GET http://localhost:8000/
+
+### OpenAPI Schema
+GET http://localhost:8000/openapi.json
+
+### ===== ADRs =====
+
+### List all ADRs
+GET http://localhost:8000/api/adrs
+
+### Create an ADR
+POST http://localhost:8000/api/adrs
+Content-Type: application/json
+
+{
+  "id": "ADR-001",
+  "title": "Use FastAPI for backend",
+  "status": "accepted",
+  "date": "2024-05-10",
+  "authors": ["John Doe"],
+  "context": "We need to choose a web framework for our backend API",
+  "decision": "We will use FastAPI because it provides automatic OpenAPI documentation, type safety, and high performance",
+  "alternatives": {
+    "Flask": {
+      "pros": ["Simple", "Mature ecosystem"],
+      "cons": ["No built-in type validation", "Manual OpenAPI setup"],
+      "score": {
+        "performance": 6,
+        "ease_of_use": 7,
+        "maintainability": 6
+      }
+    },
+    "Django": {
+      "pros": ["Batteries included", "Admin interface"],
+      "cons": ["Heavy for API-only projects", "Steeper learning curve"],
+      "score": {
+        "performance": 5,
+        "ease_of_use": 5,
+        "maintainability": 8
+      }
+    }
+  },
+  "relationships": {
+    "qualities": [],
+    "risks": [],
+    "technicalDebts": [],
+    "components": [],
+    "relatedAdrs": []
+  }
+}
+
+### Get a specific ADR
+GET http://localhost:8000/api/adrs/ADR-001
+
+### Update an ADR
+PUT http://localhost:8000/api/adrs/ADR-001
+Content-Type: application/json
+
+{
+  "id": "ADR-001",
+  "title": "Use FastAPI for backend (Updated)",
+  "status": "accepted",
+  "date": "2024-05-10",
+  "authors": ["John Doe", "Jane Smith"],
+  "context": "We need to choose a web framework for our backend API",
+  "decision": "We have decided to use FastAPI after evaluating multiple options",
+  "alternatives": {},
+  "relationships": {
+    "qualities": [],
+    "risks": [],
+    "technicalDebts": [],
+    "components": [],
+    "relatedAdrs": []
+  }
+}
+
+### Delete an ADR
+DELETE http://localhost:8000/api/adrs/ADR-001
+
+### ===== Quality Requirements =====
+
+### List all Quality Requirements
+GET http://localhost:8000/api/qualities
+
+### Create a Quality Requirement
+POST http://localhost:8000/api/qualities
+Content-Type: application/json
+
+{
+  "id": "QR-001",
+  "title": "Performance Requirements",
+  "description": "The system should respond quickly to user requests",
+  "metrics": [
+    {
+      "name": "Response Time",
+      "target": "< 200ms",
+      "measure": "95th percentile response time for API calls"
+    },
+    {
+      "name": "Throughput",
+      "target": "> 1000 requests/second",
+      "measure": "Maximum sustained request rate"
+    }
+  ],
+  "priority": "high",
+  "relationships": {
+    "adrs": [],
+    "risks": [],
+    "technicalDebts": [],
+    "components": []
+  }
+}
+
+### ===== Risks =====
+
+### List all Risks
+GET http://localhost:8000/api/risks
+
+### Create a Risk
+POST http://localhost:8000/api/risks
+Content-Type: application/json
+
+{
+  "id": "RISK-001",
+  "title": "Database Performance Degradation",
+  "description": "As data volume grows, database queries may become slower",
+  "impact": "high",
+  "probability": "medium",
+  "status": "identified",
+  "mitigation": "Implement database indexing and query optimization strategies",
+  "relationships": {
+    "adrs": [],
+    "qualities": [],
+    "technicalDebts": [],
+    "components": []
+  }
+}
+
+### ===== Technical Debts =====
+
+### List all Technical Debts
+GET http://localhost:8000/api/technical-debts
+
+### Create a Technical Debt
+POST http://localhost:8000/api/technical-debts
+Content-Type: application/json
+
+{
+  "id": "TD-001",
+  "title": "Missing Automated Tests",
+  "description": "Several modules lack proper unit test coverage",
+  "impact": "medium",
+  "effort": "high",
+  "status": "identified",
+  "remediation": "Implement comprehensive unit tests for all modules",
+  "relationships": {
+    "adrs": [],
+    "qualities": [],
+    "risks": [],
+    "components": []
+  }
+}
+
+### ===== Components =====
+
+### List all Components
+GET http://localhost:8000/api/components
+
+### Create a Component
+POST http://localhost:8000/api/components
+Content-Type: application/json
+
+{
+  "id": "C-001",
+  "title": "API Gateway",
+  "responsibility": "Routes incoming requests to appropriate backend services",
+  "interfaces": [
+    {
+      "name": "HTTP API",
+      "description": "RESTful API endpoints",
+      "type": "REST"
+    }
+  ],
+  "attributes": {
+    "technology": "FastAPI",
+    "deployment": "Container",
+    "scalability": "Horizontal"
+  },
+  "relationships": {
+    "adrs": [],
+    "qualities": [],
+    "risks": [],
+    "technicalDebts": [],
+    "relatedComponents": []
+  }
+}
+
+### ===== Example with Relationships =====
+
+### Create an ADR with relationships
+POST http://localhost:8000/api/adrs
+Content-Type: application/json
+
+{
+  "id": "ADR-002",
+  "title": "Use PostgreSQL for database",
+  "status": "accepted",
+  "date": "2024-05-11",
+  "authors": ["John Doe"],
+  "context": "We need to choose a database system",
+  "decision": "We will use PostgreSQL for its reliability and feature set",
+  "alternatives": {},
+  "relationships": {
+    "qualities": [
+      {
+        "id": "QR-001",
+        "type": "implements",
+        "strength": "strong"
+      }
+    ],
+    "risks": [
+      {
+        "id": "RISK-001",
+        "type": "mitigates"
+      }
+    ],
+    "technicalDebts": [],
+    "components": [
+      {
+        "id": "C-001",
+        "type": "affects"
+      }
+    ],
+    "relatedAdrs": []
+  }
+}

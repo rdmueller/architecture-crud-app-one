@@ -1,0 +1,23 @@
+== Technical Debts
+
+{% for debt_id, debt in technical_debts.items() %}
+=== {{ debt_id }}: {{ debt.title }}
+
+[cols="1,3"]
+|===
+| Impact | {{ debt.impact }}
+| Effort | {{ debt.effort }}
+| Status | {{ debt.status }}
+|===
+
+{% if debt.description %}
+{{ debt.description }}
+{% endif %}
+
+{% if debt.remediationPlan %}
+==== Remediation Plan
+
+{{ debt.remediationPlan }}
+{% endif %}
+
+{% endfor %}

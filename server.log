@@ -1,0 +1,887 @@
+INFO:     Will watch for changes in these directories: ['/data/architecture-crud-app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [3579] using StatReload
+INFO:     Started server process [3581]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'run_api.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [3581]
+INFO:     Started server process [3914]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'src/ui/pages/__init__.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [3914]
+INFO:     Started server process [4944]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'src/api/main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [4944]
+Process SpawnProcess-4:
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/usr/local/lib/python3.11/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/importer.py", line 22, in import_from_string
+    raise exc from None
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/data/architecture-crud-app/src/api/main.py", line 9, in <module>
+    from .routes import adrs, qualities, risks, technical_debts, components, architecture
+  File "/data/architecture-crud-app/src/api/routes/architecture.py", line 7, in <module>
+    from data.repository import ArchitectureRepository
+ModuleNotFoundError: No module named 'data.repository'
+WARNING:  StatReload detected changes in 'src/api/routes/architecture.py'. Reloading...
+INFO:     Started server process [5062]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:48342 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48350 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48354 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48368 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48370 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48384 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40476 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40490 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40498 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40506 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40508 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40516 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40526 - "GET /api/architecture HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:40526 - "GET /api/architecture/ HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/src/api/routes/architecture.py", line 18, in get_architecture
+    return Architecture(**data).model_dump()
+           ^^^^^^^^^^^^^^^^^^^^
+TypeError: src.api.models.architecture.Architecture() argument after ** must be a mapping, not Architecture
+INFO:     127.0.0.1:40542 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40556 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40572 - "GET /api/risks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40576 - "GET /api/technical-debts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40588 - "GET /api/components HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40598 - "GET /api/architecture HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:40598 - "GET /api/architecture/ HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/src/api/routes/architecture.py", line 18, in get_architecture
+    return Architecture(**data).model_dump()
+           ^^^^^^^^^^^^^^^^^^^^
+TypeError: src.api.models.architecture.Architecture() argument after ** must be a mapping, not Architecture
+INFO:     127.0.0.1:40602 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40610 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40614 - "GET /api/risks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40622 - "GET /api/technical-debts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40630 - "GET /api/components HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'src/ui/utils/__init__.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5062]
+INFO:     Started server process [5160]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'tests/ui/pages/test_adrs.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5160]
+INFO:     Started server process [5163]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'src/ui/pages/dashboard.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5163]
+INFO:     Started server process [5189]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:51756 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51764 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51778 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51794 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51802 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51808 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51810 - "GET /api/components HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51814 - "GET /api/components HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51828 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51842 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51850 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51862 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51872 - "GET /api/risks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51874 - "GET /api/risks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51884 - "GET /api/technical-debts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51888 - "GET /api/technical-debts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51898 - "GET /api/architecture HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:51898 - "GET /api/architecture/ HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/src/api/routes/architecture.py", line 18, in get_architecture
+    return Architecture(**data).model_dump()
+           ^^^^^^^^^^^^^^^^^^^^
+TypeError: src.api.models.architecture.Architecture() argument after ** must be a mapping, not Architecture
+INFO:     127.0.0.1:51912 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51920 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51922 - "GET /api/risks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51926 - "GET /api/technical-debts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51938 - "GET /api/components HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51950 - "GET /api/architecture HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:51950 - "GET /api/architecture/ HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/src/api/routes/architecture.py", line 18, in get_architecture
+    return Architecture(**data).model_dump()
+           ^^^^^^^^^^^^^^^^^^^^
+TypeError: src.api.models.architecture.Architecture() argument after ** must be a mapping, not Architecture
+INFO:     127.0.0.1:51960 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51976 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51992 - "GET /api/risks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51996 - "GET /api/technical-debts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51998 - "GET /api/components HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'tests/ui/pages/test_dashboard.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5189]
+INFO:     Started server process [5226]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'tests/ui/test_app.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5226]
+INFO:     Started server process [5229]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'tests/ui/pages/test_qualities.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5229]
+INFO:     Started server process [5232]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'tests/ui/pages/test_dashboard.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5232]
+INFO:     Started server process [5246]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:40908 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40910 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40922 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40934 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40950 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40956 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40970 - "GET /api/components HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40978 - "GET /api/components HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40992 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41000 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41008 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41024 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41026 - "GET /api/risks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41030 - "GET /api/risks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41032 - "GET /api/technical-debts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41044 - "GET /api/technical-debts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41060 - "GET /api/architecture HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:41060 - "GET /api/architecture/ HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/src/api/routes/architecture.py", line 18, in get_architecture
+    return Architecture(**data).model_dump()
+           ^^^^^^^^^^^^^^^^^^^^
+TypeError: src.api.models.architecture.Architecture() argument after ** must be a mapping, not Architecture
+INFO:     127.0.0.1:41064 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41066 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41070 - "GET /api/risks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41074 - "GET /api/technical-debts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41078 - "GET /api/components HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41088 - "GET /api/architecture HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:41088 - "GET /api/architecture/ HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/src/api/routes/architecture.py", line 18, in get_architecture
+    return Architecture(**data).model_dump()
+           ^^^^^^^^^^^^^^^^^^^^
+TypeError: src.api.models.architecture.Architecture() argument after ** must be a mapping, not Architecture
+INFO:     127.0.0.1:41090 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41104 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41114 - "GET /api/risks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41118 - "GET /api/technical-debts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41128 - "GET /api/components HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'tests/ui/pages/test_dashboard.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5246]
+INFO:     Started server process [5275]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'tests/ui/test_app.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5275]
+INFO:     Started server process [5287]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'tests/ui/test_app.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5287]
+INFO:     Started server process [5290]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'tests/ui/test_app.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5290]
+INFO:     Started server process [5306]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:41974 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41984 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41996 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41998 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42008 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42024 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42032 - "GET /api/components HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42048 - "GET /api/components HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42064 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42070 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42080 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42092 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42108 - "GET /api/risks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42114 - "GET /api/risks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42116 - "GET /api/technical-debts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42128 - "GET /api/technical-debts HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'src/ui/app.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5306]
+INFO:     Started server process [5366]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'src/ui/app.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5366]
+INFO:     Started server process [5425]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'tests/ui/pages/test_export.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5425]
+INFO:     Started server process [5451]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:47784 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47790 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47796 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47800 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47804 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47816 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47828 - "GET /api/components HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47838 - "GET /api/components HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47854 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47868 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47870 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47872 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47882 - "GET /api/risks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47890 - "GET /api/risks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47898 - "GET /api/technical-debts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47906 - "GET /api/technical-debts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37424 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37428 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37430 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37436 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37442 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37444 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37452 - "GET /api/components HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37456 - "GET /api/components HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37468 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37484 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37490 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37492 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37500 - "GET /api/risks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37502 - "GET /api/risks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37516 - "GET /api/technical-debts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37522 - "GET /api/technical-debts HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'src/ui/pages/relationships.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5451]
+INFO:     Started server process [5518]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'tests/ui/test_app.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5518]
+INFO:     Started server process [5533]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'tests/ui/pages/test_relationships.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5533]
+INFO:     Started server process [5556]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:57854 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57858 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57874 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57878 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57886 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57896 - "GET /api/adrs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57898 - "GET /api/components HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57908 - "GET /api/components HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57924 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57930 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57934 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57948 - "GET /api/qualities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57956 - "GET /api/risks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57958 - "GET /api/risks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57972 - "GET /api/technical-debts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57988 - "GET /api/technical-debts HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'src/ui/app.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5556]
+INFO:     Started server process [5594]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'tests/ui/pages/test_export.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5594]
+INFO:     Started server process [5613]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'src/ui/pages/__init__.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5613]
+INFO:     Started server process [5616]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'src/api/main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5616]
+Process SpawnProcess-26:
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/usr/local/lib/python3.11/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/importer.py", line 22, in import_from_string
+    raise exc from None
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/data/architecture-crud-app/src/api/main.py", line 9, in <module>
+    from .routes import adrs, qualities, risks, technical_debts, components, architecture, export
+  File "/data/architecture-crud-app/src/api/routes/export.py", line 10, in <module>
+    from api.dependencies import get_repository
+ModuleNotFoundError: No module named 'api'
+WARNING:  StatReload detected changes in 'src/api/routes/qualities.py'. Reloading...
+Process SpawnProcess-27:
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/usr/local/lib/python3.11/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/importer.py", line 22, in import_from_string
+    raise exc from None
+  File "/data/architecture-crud-app/venv/lib/python3.11/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/data/architecture-crud-app/src/api/main.py", line 9, in <module>
+    from .routes import adrs, qualities, risks, technical_debts, components, architecture, export
+  File "/data/architecture-crud-app/src/api/routes/export.py", line 10, in <module>
+    from api.dependencies import get_repository
+ModuleNotFoundError: No module named 'api'
+WARNING:  StatReload detected changes in 'src/api/dependencies.py'. Reloading...
+INFO:     Started server process [6120]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'src/ui/pages/qualities.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [6120]
+INFO:     Started server process [6312]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'src/api/routes/architecture.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [6312]
+INFO:     Started server process [6443]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'src/ui/pages/qualities.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [6443]
+INFO:     Started server process [6626]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'tests/ui/pages/test_dashboard_comprehensive.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [6626]
+INFO:     Started server process [7061]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'tests/ui/pages/test_dashboard_comprehensive.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [7061]
+INFO:     Started server process [7076]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'src/ui/pages/adrs.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [7076]
+INFO:     Started server process [7113]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'tests/ui/pages/test_export.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [7113]
+INFO:     Started server process [7163]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'src/ui/pages/dashboard.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [7163]
+INFO:     Started server process [7177]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'tests/ui/pages/test_adrs_comprehensive.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [7177]
+INFO:     Started server process [7230]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'tests/ui/pages/test_adrs.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [7230]
+INFO:     Started server process [7269]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'tests/ui/pages/test_adrs_comprehensive.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [7269]
+INFO:     Started server process [7317]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'tests/integration/test_fixtures.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [7317]
+INFO:     Started server process [8237]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'tests/integration/conftest.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8237]
+INFO:     Started server process [8254]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.

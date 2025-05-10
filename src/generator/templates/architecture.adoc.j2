@@ -1,0 +1,35 @@
+= Architecture Documentation
+:toc: left
+:toclevels: 3
+:numbered:
+:source-highlighter: rouge
+:icons: font
+:generated-date: {{ generation_date }}
+
+[abstract]
+== Abstract
+
+This document contains the architecture documentation generated on {{ generation_date }}.
+It includes Architecture Decision Records (ADRs), quality requirements, risks, technical debts, and component descriptions.
+
+== Architecture Overview
+
+This architecture documentation follows the arc42 template structure and contains:
+
+* {{ adrs|length }} Architecture Decision Records
+* {{ qualities|length }} Quality Requirements
+* {{ risks|length }} Identified Risks
+* {{ technical_debts|length }} Technical Debts
+* {{ components|length }} Components
+
+{% include 'adrs.adoc.j2' %}
+
+{% include 'qualities.adoc.j2' %}
+
+{% include 'risks.adoc.j2' %}
+
+{% include 'technical_debts.adoc.j2' %}
+
+{% include 'components.adoc.j2' %}
+
+{% include 'relationships.adoc.j2' %}

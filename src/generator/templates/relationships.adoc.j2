@@ -1,0 +1,32 @@
+== Relationships
+
+=== Relationship Matrix
+
+[cols="{% for entity in entities %}1{% if not loop.last %},{% endif %}{% endfor %}"]
+|===
+| {% for entity in entities %} | {{ entity.id }}{% endfor %}
+
+{% for source in entities %}
+| {{ source.id }}
+{% for target in entities %}
+| {% if relationships[source.id][target.id] %}
+    {% for rel in relationships[source.id][target.id] %}
+    {{ rel.type }} ({{ rel.strength }}){% if not loop.last %}, {% endif %}
+    {% endfor %}
+  {% else %}
+    -
+  {% endif %}
+{% endfor %}
+{% endfor %}
+|===
+
+=== Relationship Summary
+
+{% set total_relationships = namespace(value=0) %}
+{% for source_id, targets in relationships.items() %}
+  {% for target_id, rels in targets.items() %}
+    {% set total_relationships.value = total_relationships.value + rels|length %}
+  {% endfor %}
+{% endfor %}
+
+Total number of relationships: {{ total_relationships.value }}

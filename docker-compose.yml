@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - "8082:8082"
+    volumes:
+      - ./data:/app/data
+      - ./src:/app/src
+    environment:
+      - ARCHITECTURE_DATA_FILE=/app/data/architecture.json
+    command: python run_api.py
+
+  ui:
+    build:
+      context: .
+      dockerfile: Dockerfile.ui
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./src:/app/src
+    environment:
+      - API_BASE_URL=http://api:8082
+    depends_on:
+      - api
+    command: streamlit run src/ui/app.py

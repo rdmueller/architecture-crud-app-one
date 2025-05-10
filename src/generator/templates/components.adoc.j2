@@ -1,0 +1,32 @@
+== Components
+
+{% for component_id, component in components.items() %}
+=== {{ component_id }}: {{ component.title }}
+
+{% if component.responsibility %}
+*Responsibility:* {{ component.responsibility }}
+{% endif %}
+
+{% if component.interfaces and component.interfaces|length > 0 %}
+==== Interfaces
+
+{% for interface in component.interfaces %}
+* {{ interface }}
+{% endfor %}
+{% endif %}
+
+{% if component.attributes and component.attributes|length > 0 %}
+==== Attributes
+
+[cols="1,2"]
+|===
+| Attribute | Value
+
+{% for key, value in component.attributes.items() %}
+| {{ key }}
+| {{ value }}
+{% endfor %}
+|===
+{% endif %}
+
+{% endfor %}

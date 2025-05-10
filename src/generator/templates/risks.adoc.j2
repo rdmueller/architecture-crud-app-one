@@ -1,0 +1,23 @@
+== Risks
+
+{% for risk_id, risk in risks.items() %}
+=== {{ risk_id }}: {{ risk.title }}
+
+[cols="1,3"]
+|===
+| Impact | {{ risk.impact }}
+| Likelihood | {{ risk.likelihood }}
+| Status | {{ risk.status }}
+|===
+
+{% if risk.description %}
+{{ risk.description }}
+{% endif %}
+
+{% if risk.mitigationStrategy %}
+==== Mitigation Strategy
+
+{{ risk.mitigationStrategy }}
+{% endif %}
+
+{% endfor %}

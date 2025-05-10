@@ -1,0 +1,104 @@
+== Architecture Decision Records
+
+{% for adr_id, adr in adrs.items() %}
+=== {{ adr_id }}: {{ adr.title }}
+
+[cols="1,3"]
+|===
+| Status | {{ adr.status }}
+| Date | {{ adr.date }}
+| Authors | {{ adr.authors|join(', ') }}
+|===
+
+{% if adr.context %}
+==== Context
+
+{{ adr.context }}
+{% endif %}
+
+{% if adr.decision %}
+==== Decision
+
+{{ adr.decision }}
+{% endif %}
+
+{% if adr.alternatives and adr.alternatives|length > 0 %}
+==== Alternatives Considered
+
+{% for alt_name, alt_data in adr.alternatives.items() %}
+.{{ alt_name }}
+{% if alt_data.advantages %}
+*Advantages:*
+{% for advantage in alt_data.advantages %}
+* {{ advantage }}
+{% endfor %}
+{% endif %}
+
+{% if alt_data.disadvantages %}
+*Disadvantages:*
+{% for disadvantage in alt_data.disadvantages %}
+* {{ disadvantage }}
+{% endfor %}
+{% endif %}
+
+{% endfor %}
+{% endif %}
+
+{% if adr.consequences %}
+==== Consequences
+
+{% if adr.consequences.positive %}
+*Positive:*
+{% for consequence in adr.consequences.positive %}
+* {{ consequence }}
+{% endfor %}
+{% endif %}
+
+{% if adr.consequences.negative %}
+*Negative:*
+{% for consequence in adr.consequences.negative %}
+* {{ consequence }}
+{% endfor %}
+{% endif %}
+{% endif %}
+
+{% if adr.relationships %}
+==== Related Items
+
+{% if adr.relationships.qualities %}
+*Related Quality Requirements:*
+{% for rel in adr.relationships.qualities %}
+* {{ rel.targetId }} ({{ rel.type }})
+{% endfor %}
+{% endif %}
+
+{% if adr.relationships.risks %}
+*Related Risks:*
+{% for rel in adr.relationships.risks %}
+* {{ rel.targetId }} ({{ rel.type }})
+{% endfor %}
+{% endif %}
+
+{% if adr.relationships.technicalDebts %}
+*Related Technical Debts:*
+{% for rel in adr.relationships.technicalDebts %}
+* {{ rel.targetId }} ({{ rel.type }})
+{% endfor %}
+{% endif %}
+
+{% if adr.relationships.components %}
+*Related Components:*
+{% for rel in adr.relationships.components %}
+* {{ rel.targetId }} ({{ rel.type }})
+{% endfor %}
+{% endif %}
+
+{% if adr.relationships.relatedAdrs %}
+*Related ADRs:*
+{% for rel in adr.relationships.relatedAdrs %}
+* {{ rel.targetId }} ({{ rel.type }})
+{% endfor %}
+{% endif %}
+{% endif %}
+
+{% endfor %}

@@ -1,0 +1,30 @@
+== Quality Requirements
+
+{% for quality_id, quality in qualities.items() %}
+=== {{ quality_id }}: {{ quality.title }}
+
+[cols="1,3"]
+|===
+| Priority | {{ quality.priority }}
+|===
+
+{% if quality.description %}
+{{ quality.description }}
+{% endif %}
+
+{% if quality.metrics and quality.metrics|length > 0 %}
+==== Metrics
+
+[cols="1,1,1"]
+|===
+| Metric | Target Value | Unit
+
+{% for metric in quality.metrics %}
+| {{ metric.metricName }}
+| {{ metric.targetValue }}
+| {{ metric.unit }}
+{% endfor %}
+|===
+{% endif %}
+
+{% endfor %}

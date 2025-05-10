@@ -1,0 +1,54 @@
+"""Main Streamlit application for Architecture CRUD."""
+import streamlit as st
+from pathlib import Path
+import sys
+
+# Add parent directory to path to import modules
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+# Import pages
+from ui.pages import dashboard, adrs, qualities, risks, technical_debts, components, relationships, export
+
+# Configure Streamlit page
+st.set_page_config(
+    page_title="Architecture CRUD",
+    page_icon="🏛️",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
+
+
+def main():
+    """Main function for the Streamlit app."""
+    # Title
+    st.title("Architecture CRUD Application")
+    
+    # Sidebar navigation
+    st.sidebar.title("Navigation")
+    page = st.sidebar.selectbox(
+        "Navigation",
+        ["Dashboard", "ADRs", "Qualities", "Risks", "Technical Debts", "Components", "Relationships", "Export"],
+        key="navigation"
+    )
+    
+    # Render the selected page
+    if page == "Dashboard":
+        dashboard.render_dashboard()
+    elif page == "ADRs":
+        adrs.render_adrs()
+    elif page == "Qualities":
+        qualities.render_qualities()
+    elif page == "Risks":
+        risks.render_risks()
+    elif page == "Technical Debts":
+        technical_debts.render_technical_debts()
+    elif page == "Components":
+        components.render_components()
+    elif page == "Relationships":
+        relationships.render_relationships()
+    elif page == "Export":
+        export.render_export()
+
+
+if __name__ == "__main__":
+    main()
