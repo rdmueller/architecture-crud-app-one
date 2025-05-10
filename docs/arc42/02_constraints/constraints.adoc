@@ -1,0 +1,35 @@
+= Randbedingungen
+
+== Technische Randbedingungen
+
+[cols="1,3", options="header"]
+|===
+| Randbedingung | Beschreibung
+| Programmiersprache | Python 3.10+
+| Deployment | Lokale Installation oder Docker-Container
+| Betriebssystem | Plattformunabhängig (Windows, Linux, macOS)
+| Browser | Moderne Browser (Chrome, Firefox, Safari) für die Weboberfläche
+| Speicher | Lokales Dateisystem für JSON-Persistenz
+|===
+
+== Organisatorische Randbedingungen
+
+[cols="1,3", options="header"]
+|===
+| Randbedingung | Beschreibung
+| Entwicklungszeit | Prototyp innerhalb von 1 Woche
+| Team | 1-2 Entwickler
+| Budget | Keine externen Kosten, nur Open-Source-Technologien
+| Wartung | Minimaler Wartungsaufwand erforderlich
+|===
+
+== Konventionen
+
+[cols="1,3", options="header"]
+|===
+| Konvention | Beschreibung
+| Kodierung | UTF-8 für alle Textdateien
+| Dateiformat | JSON für Datenpersistenz, AsciiDoc für Dokumentation
+| Versionierung | Semantic Versioning (MAJOR.MINOR.PATCH)
+| Code-Stil | PEP 8 für Python-Code
+|===

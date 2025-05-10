@@ -1,0 +1,60 @@
+= Kontextabgrenzung
+
+== Fachlicher Kontext
+
+[plantuml, business-context, svg]
+....
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+Person(architect, "Architekt", "Erstellt und verwaltet Architekturentscheidungen")
+Person(developer, "Entwickler", "Nutzt Architekturdokumentation")
+Person(pm, "Projektleiter", "Überwacht Risiken und technische Schulden")
+
+System(crud_app, "Architecture CRUD Application", "Verwaltung von Architekturbeziehungen")
+
+System_Ext(file_system, "Dateisystem", "Speichert JSON-Dateien")
+System_Ext(browser, "Web Browser", "Anzeige der Benutzeroberfläche")
+
+Rel(architect, crud_app, "Verwaltet ADRs, Risiken, etc.")
+Rel(developer, crud_app, "Liest Architekturinfos")
+Rel(pm, crud_app, "Überwacht Risiken")
+
+Rel(crud_app, file_system, "Speichert/lädt JSON")
+Rel(browser, crud_app, "Zeigt UI an")
+@enduml
+....
+
+== Technischer Kontext
+
+[plantuml, technical-context, svg]
+....
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(user, "Benutzer", "Nutzt die Anwendung über Browser")
+
+Container_Boundary(crud_app, "Architecture CRUD Application") {
+    Container(ui, "Streamlit UI", "Python", "Benutzeroberfläche")
+    Container(api, "FastAPI", "Python", "REST API")
+    Container(data, "Data Layer", "Python", "Datenverwaltung und Validierung")
+}
+
+ContainerDb(json_files, "JSON Files", "Dateisystem", "Architekturdaten")
+
+Rel(user, ui, "Nutzt", "HTTPS")
+Rel(ui, api, "Ruft auf", "HTTP/REST")
+Rel(api, data, "Verwendet")
+Rel(data, json_files, "Liest/Schreibt")
+@enduml
+....
+
+=== Externe Schnittstellen
+
+[cols="1,2,3", options="header"]
+|===
+| Schnittstelle | Beschreibung | Technologie
+| Web Browser | Benutzerinteraktion mit der Anwendung | HTTP/HTTPS
+| Dateisystem | Persistierung der JSON-Daten | OS File I/O
+| Export | AsciiDoc-Generierung | File Export
+|===

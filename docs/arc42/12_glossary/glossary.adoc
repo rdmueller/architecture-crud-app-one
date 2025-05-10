@@ -1,0 +1,57 @@
+= Glossar
+
+[cols="1,3", options="header"]
+|===
+| Begriff | Erklärung
+
+| ADR
+| Architecture Decision Record - Dokumentation einer wichtigen Architekturentscheidung mit Kontext, Alternativen und Begründung
+
+| arc42
+| Template für Architekturdokumentation, entwickelt von Dr. Gernot Starke und Peter Hruschka
+
+| AsciiDoc
+| Textbasiertes Dokumentationsformat, das in verschiedene Ausgabeformate (HTML, PDF, etc.) konvertiert werden kann
+
+| CRUD
+| Create, Read, Update, Delete - Grundlegende Operationen für Datenverwaltung
+
+| FastAPI
+| Modernes Python-Web-Framework für die Erstellung von APIs mit automatischer Dokumentation
+
+| JSON Schema
+| Spezifikation zur Definition der Struktur von JSON-Daten und deren Validierung
+
+| Pydantic
+| Python-Bibliothek für Datenvalidierung und Settings-Management mittels Python Type Annotations
+
+| Repository Pattern
+| Entwurfsmuster, das die Datenzugriffslogik kapselt und eine abstraktere Schnittstelle bietet
+
+| Streamlit
+| Python-Framework zur schnellen Erstellung von Daten-Apps und Dashboards
+
+| Type Hints
+| Python-Feature zur Annotation von Variablen-, Parameter- und Rückgabetypen
+
+| Jinja2
+| Template-Engine für Python, verwendet für die Generierung von AsciiDoc aus Vorlagen
+
+| Docker
+| Containerisierungs-Plattform zur Paketierung und Ausführung von Anwendungen
+
+| REST
+| Representational State Transfer - Architekturstil für verteilte Systeme
+
+| OpenAPI
+| Spezifikation zur Beschreibung von REST-APIs (früher Swagger)
+
+| ASGI
+| Asynchronous Server Gateway Interface - Standard für asynchrone Python-Webanwendungen
+
+| UI
+| User Interface - Benutzeroberfläche der Anwendung
+
+| API
+| Application Programming Interface - Schnittstelle zur Programmierung von Anwendungen
+|===

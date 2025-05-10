@@ -1,0 +1,564 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Architecture Relationship Model",
+  "description": "Schema for structured documentation of architectural elements and their relationships",
+  "type": "object",
+  "required": [
+    "adrs",
+    "qualities",
+    "risks",
+    "technicalDebts",
+    "components"
+  ],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "projectName": {
+          "type": "string"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "adrs": {
+      "type": "object",
+      "description": "Architecture Decision Records",
+      "patternProperties": {
+        "^ADR-[0-9]{3}$": {
+          "$ref": "#/definitions/adr"
+        }
+      },
+      "additionalProperties": false
+    },
+    "qualities": {
+      "type": "object",
+      "description": "Quality Requirements",
+      "patternProperties": {
+        "^Q-[0-9]{3}$": {
+          "$ref": "#/definitions/quality"
+        }
+      },
+      "additionalProperties": false
+    },
+    "risks": {
+      "type": "object",
+      "description": "Architectural Risks",
+      "patternProperties": {
+        "^R-[0-9]{3}$": {
+          "$ref": "#/definitions/risk"
+        }
+      },
+      "additionalProperties": false
+    },
+    "technicalDebts": {
+      "type": "object",
+      "description": "Technical Debts",
+      "patternProperties": {
+        "^TD-[0-9]{3}$": {
+          "$ref": "#/definitions/technicalDebt"
+        }
+      },
+      "additionalProperties": false
+    },
+    "components": {
+      "type": "object",
+      "description": "Architectural Components",
+      "patternProperties": {
+        "^C-[0-9]{3}$": {
+          "$ref": "#/definitions/component"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "definitions": {
+    "adr": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "status",
+        "date",
+        "authors",
+        "context",
+        "decision",
+        "relationships"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^ADR-[0-9]{3}$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 100
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "proposed",
+            "accepted",
+            "rejected",
+            "deprecated",
+            "superseded"
+          ]
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "authors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "context": {
+          "type": "string",
+          "description": "Problem description and context"
+        },
+        "decisionCriteria": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "alternatives": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "description"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "prosCons": {
+                "type": "object",
+                "properties": {
+                  "pros": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "cons": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "decision": {
+          "type": "string",
+          "description": "The chosen solution"
+        },
+        "relationships": {
+          "type": "object",
+          "properties": {
+            "qualities": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/qualityRelationship"
+              }
+            },
+            "risks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/riskRelationship"
+              }
+            },
+            "technicalDebts": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/technicalDebtRelationship"
+              }
+            },
+            "components": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/componentRelationship"
+              }
+            },
+            "relatedAdrs": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/adrRelationship"
+              }
+            }
+          }
+        },
+        "supersededBy": {
+          "type": "string",
+          "pattern": "^ADR-[0-9]{3}$",
+          "description": "Reference to the ADR that supersedes this one"
+        },
+        "additionalNotes": {
+          "type": "string"
+        }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "description"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^Q-[0-9]{3}$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string"
+        },
+        "metrics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "description",
+              "criteria"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "criteria": {
+                "type": "string"
+              },
+              "targetValue": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "priority": {
+          "type": "string",
+          "enum": [
+            "critical",
+            "high",
+            "medium",
+            "low"
+          ]
+        }
+      }
+    },
+    "risk": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "description"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^R-[0-9]{3}$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string"
+        },
+        "impact": {
+          "type": "string",
+          "enum": [
+            "critical",
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "likelihood": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "mitigationStrategy": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "mitigated",
+            "accepted",
+            "eliminated"
+          ]
+        }
+      }
+    },
+    "technicalDebt": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "description"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^TD-[0-9]{3}$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string"
+        },
+        "impact": {
+          "type": "string",
+          "enum": [
+            "critical",
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "remediationEffort": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "remediationPlan": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "addressing",
+            "resolved"
+          ]
+        }
+      }
+    },
+    "component": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "responsibility"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^C-[0-9]{3}$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 50
+        },
+        "responsibility": {
+          "type": "string"
+        },
+        "interfaces": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "description"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "provided",
+                  "required",
+                  "internal"
+                ]
+              }
+            }
+          }
+        },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "qualityRelationship": {
+      "type": "object",
+      "required": [
+        "id",
+        "impact",
+        "rationale"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^Q-[0-9]{3}$"
+        },
+        "impact": {
+          "type": "string",
+          "enum": [
+            "positive",
+            "negative",
+            "neutral"
+          ]
+        },
+        "rationale": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "riskRelationship": {
+      "type": "object",
+      "required": [
+        "id",
+        "rationale"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^R-[0-9]{3}$"
+        },
+        "rationale": {
+          "type": "string"
+        },
+        "contributionFactor": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "How much this ADR contributes to the overall risk"
+        }
+      }
+    },
+    "technicalDebtRelationship": {
+      "type": "object",
+      "required": [
+        "id",
+        "rationale"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^TD-[0-9]{3}$"
+        },
+        "rationale": {
+          "type": "string"
+        },
+        "intentional": {
+          "type": "boolean",
+          "description": "Whether this technical debt was knowingly accepted"
+        }
+      }
+    },
+    "componentRelationship": {
+      "type": "object",
+      "required": [
+        "id",
+        "impact"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^C-[0-9]{3}$"
+        },
+        "impact": {
+          "type": "string"
+        },
+        "changeType": {
+          "type": "string",
+          "enum": [
+            "significant",
+            "moderate",
+            "minor",
+            "none"
+          ]
+        }
+      }
+    },
+    "adrRelationship": {
+      "type": "object",
+      "required": [
+        "id",
+        "relationType",
+        "description"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^ADR-[0-9]{3}$"
+        },
+        "relationType": {
+          "type": "string",
+          "enum": [
+            "influences",
+            "influencedBy",
+            "enables",
+            "enabledBy",
+            "conflicts",
+            "supersedes",
+            "supersededBy"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "strength": {
+          "type": "string",
+          "enum": [
+            "strong",
+            "moderate",
+            "weak"
+          ]
+        }
+      }
+    }
+  }
+}

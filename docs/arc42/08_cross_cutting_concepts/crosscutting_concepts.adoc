@@ -1,0 +1,207 @@
+= Querschnittliche Konzepte
+
+== Domänenmodell
+
+[plantuml, domain-model, svg]
+....
+@startuml
+class ADR {
+    -id: str
+    -title: str
+    -status: str
+    -date: date
+    -authors: List[str]
+    -context: str
+    -decision: str
+    -relationships: Relationships
+}
+
+class QualityRequirement {
+    -id: str
+    -title: str
+    -description: str
+    -metrics: List[Metric]
+    -priority: str
+}
+
+class Risk {
+    -id: str
+    -title: str
+    -description: str
+    -impact: str
+    -likelihood: str
+    -mitigationStrategy: str
+    -status: str
+}
+
+class TechnicalDebt {
+    -id: str
+    -title: str
+    -description: str
+    -impact: str
+    -remediationEffort: str
+    -status: str
+}
+
+class Component {
+    -id: str
+    -title: str
+    -responsibility: str
+    -interfaces: List[Interface]
+}
+
+class Relationships {
+    -qualities: List[QualityRelation]
+    -risks: List[RiskRelation]
+    -technicalDebts: List[TechDebtRelation]
+    -components: List[ComponentRelation]
+    -relatedAdrs: List[ADRRelation]
+}
+
+ADR --> Relationships
+Relationships --> QualityRequirement
+Relationships --> Risk
+Relationships --> TechnicalDebt
+Relationships --> Component
+Relationships --> ADR
+@enduml
+....
+
+== Fehlerbehandlung
+
+=== Fehlerklassifizierung
+
+[cols="1,3,2", options="header"]
+|===
+| Fehlertyp | Beschreibung | Behandlung
+| Validierungsfehler | Ungültige Eingabedaten | 400 Bad Request mit Details
+| Schema-Fehler | Daten entsprechen nicht dem JSON-Schema | 422 Unprocessable Entity
+| Nicht gefunden | Ressource existiert nicht | 404 Not Found
+| Systemfehler | Unerwartete Exceptions | 500 Internal Server Error + Logging
+|===
+
+=== Fehlerbehandlungsstrategie
+
+```python
+@app.exception_handler(ValidationError)
+async def validation_exception_handler(request, exc):
+    return JSONResponse(
+        status_code=400,
+        content={"detail": exc.errors()}
+    )
+
+@app.exception_handler(FileNotFoundError)
+async def not_found_handler(request, exc):
+    return JSONResponse(
+        status_code=404,
+        content={"detail": str(exc)}
+    )
+```
+
+== Persistenz
+
+=== JSON-Schema-Validierung
+
+Alle Daten werden vor dem Speichern gegen das definierte JSON-Schema validiert:
+
+```python
+def validate_data(data: dict) -> bool:
+    with open('schema.json') as f:
+        schema = json.load(f)
+    
+    try:
+        jsonschema.validate(data, schema)
+        return True
+    except jsonschema.ValidationError as e:
+        raise ValueError(f"Schema validation failed: {e}")
+```
+
+=== Transaktionsmanagement
+
+Pseudo-Transaktionen durch Backup vor Schreiboperationen:
+
+```python
+def save_with_backup(data: dict, filepath: str):
+    # Backup erstellen
+    if os.path.exists(filepath):
+        backup_path = f"{filepath}.backup"
+        shutil.copy2(filepath, backup_path)
+    
+    try:
+        # Daten speichern
+        with open(filepath, 'w') as f:
+            json.dump(data, f, indent=2)
+    except Exception as e:
+        # Rollback bei Fehler
+        if os.path.exists(backup_path):
+            shutil.move(backup_path, filepath)
+        raise e
+```
+
+== Logging
+
+=== Log-Level
+
+* **DEBUG**: Detaillierte Entwicklungsinformationen
+* **INFO**: Allgemeine Betriebsinformationen
+* **WARNING**: Nicht-kritische Probleme
+* **ERROR**: Fehler die behandelt werden
+* **CRITICAL**: Kritische Fehler die zum Absturz führen
+
+=== Log-Format
+
+```python
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('app.log'),
+        logging.StreamHandler()
+    ]
+)
+```
+
+== Konfiguration
+
+=== Umgebungsvariablen
+
+```python
+class Settings(BaseSettings):
+    APP_NAME: str = "Architecture CRUD App"
+    API_HOST: str = "localhost"
+    API_PORT: int = 8000
+    UI_PORT: int = 8501
+    DATA_PATH: str = "./data"
+    LOG_LEVEL: str = "INFO"
+    
+    class Config:
+        env_file = ".env"
+```
+
+== Sicherheit
+
+=== Input-Validierung
+
+* Alle Eingaben werden durch Pydantic-Modelle validiert
+* JSON-Schema-Validierung als zusätzliche Sicherheitsebene
+* Pfad-Traversal-Schutz für Dateizugriffe
+
+=== Fehlerbehandlung
+
+* Keine sensiblen Informationen in Fehlermeldungen
+* Stack-Traces nur im Debug-Modus
+* Strukturierte Fehlerantworten
+
+== Internationalisierung
+
+Vorbereitung für mehrsprachige Unterstützung:
+
+```python
+from gettext import gettext as _
+
+messages = {
+    'validation_error': _('Validation failed for field {field}'),
+    'not_found': _('Resource {resource} not found'),
+    'save_success': _('Successfully saved {item}')
+}
+```

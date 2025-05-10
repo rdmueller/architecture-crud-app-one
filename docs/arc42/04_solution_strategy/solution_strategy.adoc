@@ -1,0 +1,57 @@
+= Lösungsstrategie
+
+== Überblick
+
+Die Architecture CRUD Application folgt einem schichtbasierten Ansatz mit klarer Trennung der Verantwortlichkeiten:
+
+* **Präsentationsschicht**: Streamlit-basierte Web-UI für intuitive Benutzerinteraktion
+* **API-Schicht**: FastAPI für robuste REST-Schnittstellen 
+* **Datenschicht**: JSON-basierte Persistenz mit Schema-Validierung
+* **Generierungsschicht**: Template-basierte AsciiDoc-Generierung
+
+== Technologieentscheidungen
+
+=== Frontend: Streamlit
+* Sehr schnelle Entwicklung von datenorientierten UIs
+* Native Python-Integration ohne JavaScript-Kenntnisse
+* Automatische Reaktivität und State-Management
+* Ideal für Prototypen und interne Tools
+
+=== Backend: FastAPI
+* Moderne, performante Python-Web-API
+* Automatische API-Dokumentation (OpenAPI/Swagger)
+* Native async/await-Unterstützung
+* Starke Typing-Unterstützung mit Pydantic
+
+=== Persistenz: JSON-Dateien
+* Einfachste mögliche Lösung für den Prototyp
+* Direktes Arbeiten mit dem definierten Schema
+* Versionierbar mit Git
+* Keine zusätzliche Infrastruktur erforderlich
+
+=== Validierung: JSON Schema
+* Standardisiertes Format für Datenvalidierung
+* Gute Python-Unterstützung (jsonschema-Bibliothek)
+* Selbstdokumentierend
+* Erweiterbar für zukünftige Anforderungen
+
+== Architekturmuster
+
+=== Model-View-Controller (MVC)
+Die Anwendung folgt einer MVC-artigen Struktur:
+* **Model**: JSON-Schema und Datenklassen
+* **View**: Streamlit UI-Komponenten
+* **Controller**: FastAPI-Endpunkte und Business-Logik
+
+=== Repository Pattern
+Die Datenschicht abstrahiert den Dateizugriff hinter einem Repository-Interface, was spätere Migrationen zu anderen Persistenz-Lösungen erleichtert.
+
+=== Template Method Pattern
+Die AsciiDoc-Generierung nutzt Templates für konsistente Dokumenterzeugung.
+
+== Qualitätssicherung
+
+* **Schema-Validierung**: Alle JSON-Daten werden gegen das Schema validiert
+* **Type Hints**: Durchgängige Verwendung von Python Type Hints
+* **Automatisierte Tests**: Unit- und Integrationstests für kritische Komponenten
+* **Code-Reviews**: Peer-Reviews für alle Änderungen

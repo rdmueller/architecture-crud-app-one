@@ -1,0 +1,34 @@
+= Einführung und Ziele
+
+Diese Dokumentation beschreibt die Architektur der Architecture CRUD Application, einem Werkzeug zur Verwaltung von Architekturbeziehungen im JSON-Format.
+
+== Aufgabenstellung
+
+Die Architecture CRUD Application ermöglicht es:
+
+* Architekturbeziehungen (ADRs, Qualitätsanforderungen, Risiken, technische Schulden, Komponenten) zu verwalten
+* Die Beziehungen zwischen diesen Elementen zu visualisieren und zu editieren
+* Die Daten in einem strukturierten JSON-Format zu persistieren
+* Die Architektur als AsciiDoc-Dokumentation im arc42-Format zu exportieren
+
+== Qualitätsziele
+
+[cols="1,3,1", options="header"]
+|===
+| Priorität | Qualitätsziel | Beschreibung
+| 1 | Datenintegrität | Alle Architekturdaten müssen dem definierten JSON-Schema entsprechen
+| 2 | Benutzerfreundlichkeit | Die Anwendung muss intuitiv und ohne Schulung bedienbar sein  
+| 3 | Entwicklungsgeschwindigkeit | Neue Features sollen schnell implementiert werden können
+| 4 | Skalierbarkeit | Die Anwendung soll mit bis zu 1000 ADRs performant arbeiten
+|===
+
+== Stakeholder
+
+[cols="1,3,3", options="header"]
+|===
+| Rolle | Kontakt | Erwartungen
+| Architekten | Entwicklungsteam | Einfache Verwaltung von Architekturentscheidungen
+| Entwickler | Entwicklungsteam | Schneller Zugriff auf Architekturinformationen
+| Projektleiter | Management | Übersicht über Risiken und technische Schulden
+| QA Team | Qualitätssicherung | Nachvollziehbarkeit von Qualitätsanforderungen
+|===

@@ -1,0 +1,105 @@
+= Verteilungssicht
+
+== Deployment-Übersicht
+
+[plantuml, deployment-overview, svg]
+....
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+
+Deployment_Node(dev_machine, "Entwickler-Rechner", "Windows/Linux/macOS") {
+    Deployment_Node(docker, "Docker Container", "Docker") {
+        Container(app, "Architecture CRUD App", "Python", "Streamlit + FastAPI")
+    }
+    Deployment_Node(filesystem, "Dateisystem") {
+        Container(json_storage, "JSON Files", "Files", "Architekturdaten")
+    }
+}
+
+Deployment_Node(user_machine, "Benutzer-Rechner", "Windows/Linux/macOS") {
+    Deployment_Node(browser, "Web Browser", "Chrome/Firefox/Safari") {
+        Container(web_ui, "Web UI", "HTML/JS", "Benutzeroberfläche")
+    }
+}
+
+Rel(web_ui, app, "HTTP/HTTPS", "Port 8501/8000")
+Rel(app, json_storage, "File I/O")
+@enduml
+....
+
+== Deployment-Varianten
+
+=== Variante 1: Lokale Installation
+
+**Komponenten**:
+* Python 3.10+ Installation
+* Virtuelle Python-Umgebung
+* Installierte Dependencies (requirements.txt)
+* Lokales Dateisystem für JSON-Speicherung
+
+**Start-Kommandos**:
+```bash
+# FastAPI starten
+uvicorn main:app --reload --port 8000
+
+# Streamlit starten
+streamlit run app.py --server.port 8501
+```
+
+=== Variante 2: Docker-Container
+
+**Komponenten**:
+* Docker Engine
+* Docker Compose
+* Volume-Mount für JSON-Persistenz
+
+**Docker-Compose Konfiguration**:
+```yaml
+version: '3.8'
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+  
+  ui:
+    build: .
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data
+    command: streamlit run app.py --server.port 8501
+    depends_on:
+      - api
+```
+
+== Infrastruktur-Anforderungen
+
+[cols="1,3,2", options="header"]
+|===
+| Komponente | Anforderung | Begründung
+| CPU | 2+ Cores | Parallele Verarbeitung von UI und API
+| RAM | 4 GB minimum | Python-Prozesse und Daten-Caching
+| Speicher | 1 GB | Anwendung + JSON-Daten
+| Netzwerk | Port 8000, 8501 | API und UI Zugriff
+| OS | Windows/Linux/macOS | Python-Kompatibilität
+|===
+
+== Sicherheitsüberlegungen
+
+* **Netzwerk**: Standardmäßig nur lokaler Zugriff (localhost)
+* **Dateizugriff**: Beschränkt auf konfiguriertes Datenverzeichnis
+* **Authentifizierung**: Keine (nur für lokalen/internen Gebrauch)
+* **HTTPS**: Optional über Reverse-Proxy konfigurierbar
+
+== Skalierungsoptionen
+
+Für zukünftige Erweiterungen:
+
+1. **Horizontal**: Load Balancer vor mehreren API-Instanzen
+2. **Vertikal**: Mehr CPU/RAM für größere Datenmengen
+3. **Datenbank**: Migration von JSON zu echtem Datenbanksystem
+4. **Caching**: Redis für Session-Management und Caching

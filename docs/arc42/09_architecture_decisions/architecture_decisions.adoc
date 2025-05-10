@@ -1,0 +1,218 @@
+= Architekturentscheidungen
+== ADR-001: Web-basierte Architektur mit FastAPI Backend
+*Status*: accepted
+*Datum*: 2025-01-10
+*Autoren*: System Architect
+
+=== Kontext und Problemstellung
+Für die Verwaltung von Architekturbeziehungen benötigen wir eine benutzerfreundliche Anwendung mit API-Schnittstelle
+
+=== Entscheidungskriterien
+* Einfache Entwicklung und Wartung
+* Moderne, etablierte Technologien
+* Gute JSON-Verarbeitung
+* Schnelle Entwicklungszeit
+
+=== Betrachtete Alternativen
+
+==== Django
+Full-Stack Python Framework
+
+*Vorteile:*
+* Viele eingebaute Features
+* Admin Interface
+
+*Nachteile:*
+* Überdimensioniert für unseren Use Case
+* Langsamer
+
+==== Flask
+Minimalistisches Python Framework
+
+*Vorteile:*
+* Leichtgewichtig
+* Flexibel
+
+*Nachteile:*
+* Weniger Features out-of-the-box
+* Mehr Boilerplate
+
+==== FastAPI
+Modernes Python API Framework
+
+*Vorteile:*
+* Schnell
+* Automatische API-Dokumentation
+* Gute JSON-Verarbeitung
+* Type Hints
+
+*Nachteile:*
+* Relativ neu
+* Kleinere Community als Django/Flask
+
+=== Entscheidung
+FastAPI wird als Backend-Framework gewählt wegen seiner modernen Architektur, automatischen API-Dokumentation und exzellenten JSON-Verarbeitung
+
+=== Beziehungen
+
+.Beeinflusste Qualitätsanforderungen
+[cols="1,1,3", options="header"]
+|===
+| ID | Einfluss | Begründung
+| Q-001 | positive | FastAPI bietet hohe Performance und gute Entwicklungsgeschwindigkeit
+| Q-003 | positive | FastAPI bietet automatische Validierung und Dokumentation
+|===
+
+.Erzeugte Risiken
+[cols="1,3", options="header"]
+|===
+| ID | Begründung
+| R-001 | FastAPI ist ein relativ neues Framework mit kleinerer Community
+|===
+
+== ADR-002: Streamlit für das User Interface
+*Status*: accepted
+*Datum*: 2025-01-10
+*Autoren*: System Architect
+
+=== Kontext und Problemstellung
+Wir benötigen eine einfache, schnell zu entwickelnde Benutzeroberfläche für die Verwaltung von Architekturbeziehungen
+
+=== Entscheidungskriterien
+* Schnelle Entwicklung
+* Gute Python-Integration
+* Datenorientierte Darstellung
+* Einfache Installation und Deployment
+
+=== Betrachtete Alternativen
+
+==== React
+JavaScript Frontend Framework
+
+*Vorteile:*
+* Sehr flexibel
+* Große Community
+* Viele Komponenten
+
+*Nachteile:*
+* Längere Entwicklungszeit
+* Separates Frontend-Projekt
+* JavaScript-Kenntnisse nötig
+
+==== Dash
+Python Dashboard Framework
+
+*Vorteile:*
+* Python-basiert
+* Gut für Datenvisualisierung
+
+*Nachteile:*
+* Weniger intuitiv
+* Callback-basiertes Modell kann komplex werden
+
+==== Streamlit
+Python App Framework
+
+*Vorteile:*
+* Sehr schnelle Entwicklung
+* Pythonic
+* Automatisches Reaktivität
+* Einfaches Deployment
+
+*Nachteile:*
+* Weniger flexibel als React
+* Limitierte Customisierung
+
+=== Entscheidung
+Streamlit wird als UI-Framework gewählt wegen seiner schnellen Entwicklungszeit und guten Python-Integration
+
+=== Beziehungen
+
+.Beeinflusste Qualitätsanforderungen
+[cols="1,1,3", options="header"]
+|===
+| ID | Einfluss | Begründung
+| Q-001 | positive | Streamlit ermöglicht sehr schnelle Entwicklung von Prototypen
+| Q-002 | positive | Streamlit ist sehr einfach zu bedienen und zu verstehen
+|===
+
+.Erzeugte Risiken
+[cols="1,3", options="header"]
+|===
+| ID | Begründung
+| R-002 | Streamlit hat Limitierungen bei der UI-Customisierung
+|===
+
+== ADR-003: JSON-Datei als Persistenz-Lösung
+*Status*: accepted
+*Datum*: 2025-01-10
+*Autoren*: System Architect
+
+=== Kontext und Problemstellung
+Die Anwendung muss Architekturdaten speichern und laden können. Für den initialen Prototyp ist eine einfache Lösung ausreichend
+
+=== Entscheidungskriterien
+* Einfachheit
+* Keine zusätzliche Infrastruktur
+* Direktes Arbeiten mit dem definierten JSON-Schema
+* Ausreichend für die erwartete Datenmenge
+
+=== Betrachtete Alternativen
+
+==== SQLite
+Leichtgewichtige relationale Datenbank
+
+*Vorteile:*
+* SQL-Support
+* ACID-Compliance
+* Bessere Performance bei größeren Datenmengen
+
+*Nachteile:*
+* Zusätzliche Abstraktionsschicht
+* Schema-Migration nötig
+
+==== MongoDB
+NoSQL Dokumentendatenbank
+
+*Vorteile:*
+* Native JSON-Support
+* Skalierbar
+
+*Nachteile:*
+* Externe Infrastruktur nötig
+* Überdimensioniert für den Use Case
+
+==== JSON-Datei
+Direkte Speicherung in JSON-Dateien
+
+*Vorteile:*
+* Extrem einfach
+* Keine Infrastruktur
+* Direktes Arbeiten mit Schema
+* Versionierbar mit Git
+
+*Nachteile:*
+* Keine Concurrency
+* Limitierte Skalierbarkeit
+* Ganze Datei muss geladen werden
+
+=== Entscheidung
+JSON-Dateien werden als Persistenz-Lösung gewählt für maximale Einfachheit im initialen Prototyp
+
+=== Beziehungen
+
+.Beeinflusste Qualitätsanforderungen
+[cols="1,1,3", options="header"]
+|===
+| ID | Einfluss | Begründung
+| Q-001 | positive | Sehr schnelle Implementierung möglich
+| Q-004 | negative | Skaliert nicht gut bei großen Datenmengen
+|===
+
+.Erzeugte Risiken
+[cols="1,3", options="header"]
+|===
+| ID | Begründung
+| R-003 | Keine Unterstützung für gleichzeitige Zugriffe
+|===
+

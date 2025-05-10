@@ -1,0 +1,486 @@
+{
+  "metadata": {
+    "projectName": "Architecture CRUD Application",
+    "lastUpdated": "2025-01-10T09:00:00Z",
+    "version": "1.0.0"
+  },
+  "adrs": {
+    "ADR-001": {
+      "id": "ADR-001",
+      "title": "Web-basierte Architektur mit FastAPI Backend",
+      "status": "accepted",
+      "date": "2025-01-10",
+      "authors": [
+        "System Architect"
+      ],
+      "context": "F\u00fcr die Verwaltung von Architekturbeziehungen ben\u00f6tigen wir eine benutzerfreundliche Anwendung mit API-Schnittstelle",
+      "decisionCriteria": [
+        "Einfache Entwicklung und Wartung",
+        "Moderne, etablierte Technologien",
+        "Gute JSON-Verarbeitung",
+        "Schnelle Entwicklungszeit"
+      ],
+      "alternatives": [
+        {
+          "name": "Django",
+          "description": "Full-Stack Python Framework",
+          "prosCons": {
+            "pros": [
+              "Viele eingebaute Features",
+              "Admin Interface"
+            ],
+            "cons": [
+              "\u00dcberdimensioniert f\u00fcr unseren Use Case",
+              "Langsamer"
+            ]
+          }
+        },
+        {
+          "name": "Flask",
+          "description": "Minimalistisches Python Framework",
+          "prosCons": {
+            "pros": [
+              "Leichtgewichtig",
+              "Flexibel"
+            ],
+            "cons": [
+              "Weniger Features out-of-the-box",
+              "Mehr Boilerplate"
+            ]
+          }
+        },
+        {
+          "name": "FastAPI",
+          "description": "Modernes Python API Framework",
+          "prosCons": {
+            "pros": [
+              "Schnell",
+              "Automatische API-Dokumentation",
+              "Gute JSON-Verarbeitung",
+              "Type Hints"
+            ],
+            "cons": [
+              "Relativ neu",
+              "Kleinere Community als Django/Flask"
+            ]
+          }
+        }
+      ],
+      "decision": "FastAPI wird als Backend-Framework gew\u00e4hlt wegen seiner modernen Architektur, automatischen API-Dokumentation und exzellenten JSON-Verarbeitung",
+      "relationships": {
+        "qualities": [
+          {
+            "id": "Q-001",
+            "impact": "positive",
+            "rationale": "FastAPI bietet hohe Performance und gute Entwicklungsgeschwindigkeit"
+          },
+          {
+            "id": "Q-003",
+            "impact": "positive",
+            "rationale": "FastAPI bietet automatische Validierung und Dokumentation"
+          }
+        ],
+        "risks": [
+          {
+            "id": "R-001",
+            "rationale": "FastAPI ist ein relativ neues Framework mit kleinerer Community"
+          }
+        ],
+        "technicalDebts": [],
+        "components": [
+          {
+            "id": "C-001",
+            "impact": "Definiert die Technologiebasis f\u00fcr die API-Schicht",
+            "changeType": "significant"
+          }
+        ],
+        "relatedAdrs": []
+      }
+    },
+    "ADR-002": {
+      "id": "ADR-002",
+      "title": "Streamlit f\u00fcr das User Interface",
+      "status": "accepted",
+      "date": "2025-01-10",
+      "authors": [
+        "System Architect"
+      ],
+      "context": "Wir ben\u00f6tigen eine einfache, schnell zu entwickelnde Benutzeroberfl\u00e4che f\u00fcr die Verwaltung von Architekturbeziehungen",
+      "decisionCriteria": [
+        "Schnelle Entwicklung",
+        "Gute Python-Integration",
+        "Datenorientierte Darstellung",
+        "Einfache Installation und Deployment"
+      ],
+      "alternatives": [
+        {
+          "name": "React",
+          "description": "JavaScript Frontend Framework",
+          "prosCons": {
+            "pros": [
+              "Sehr flexibel",
+              "Gro\u00dfe Community",
+              "Viele Komponenten"
+            ],
+            "cons": [
+              "L\u00e4ngere Entwicklungszeit",
+              "Separates Frontend-Projekt",
+              "JavaScript-Kenntnisse n\u00f6tig"
+            ]
+          }
+        },
+        {
+          "name": "Dash",
+          "description": "Python Dashboard Framework",
+          "prosCons": {
+            "pros": [
+              "Python-basiert",
+              "Gut f\u00fcr Datenvisualisierung"
+            ],
+            "cons": [
+              "Weniger intuitiv",
+              "Callback-basiertes Modell kann komplex werden"
+            ]
+          }
+        },
+        {
+          "name": "Streamlit",
+          "description": "Python App Framework",
+          "prosCons": {
+            "pros": [
+              "Sehr schnelle Entwicklung",
+              "Pythonic",
+              "Automatisches Reaktivit\u00e4t",
+              "Einfaches Deployment"
+            ],
+            "cons": [
+              "Weniger flexibel als React",
+              "Limitierte Customisierung"
+            ]
+          }
+        }
+      ],
+      "decision": "Streamlit wird als UI-Framework gew\u00e4hlt wegen seiner schnellen Entwicklungszeit und guten Python-Integration",
+      "relationships": {
+        "qualities": [
+          {
+            "id": "Q-001",
+            "impact": "positive",
+            "rationale": "Streamlit erm\u00f6glicht sehr schnelle Entwicklung von Prototypen"
+          },
+          {
+            "id": "Q-002",
+            "impact": "positive",
+            "rationale": "Streamlit ist sehr einfach zu bedienen und zu verstehen"
+          }
+        ],
+        "risks": [
+          {
+            "id": "R-002",
+            "rationale": "Streamlit hat Limitierungen bei der UI-Customisierung"
+          }
+        ],
+        "technicalDebts": [
+          {
+            "id": "TD-001",
+            "rationale": "Die gew\u00e4hlte UI-Technologie k\u00f6nnte sp\u00e4ter durch eine flexiblere L\u00f6sung ersetzt werden m\u00fcssen",
+            "intentional": true
+          }
+        ],
+        "components": [
+          {
+            "id": "C-002",
+            "impact": "Definiert die Technologiebasis f\u00fcr die Benutzeroberfl\u00e4che",
+            "changeType": "significant"
+          }
+        ],
+        "relatedAdrs": [
+          {
+            "id": "ADR-001",
+            "relationType": "influences",
+            "description": "Die API-Architektur beeinflusst die UI-Wahl",
+            "strength": "moderate"
+          }
+        ]
+      }
+    },
+    "ADR-003": {
+      "id": "ADR-003",
+      "title": "JSON-Datei als Persistenz-L\u00f6sung",
+      "status": "accepted",
+      "date": "2025-01-10",
+      "authors": [
+        "System Architect"
+      ],
+      "context": "Die Anwendung muss Architekturdaten speichern und laden k\u00f6nnen. F\u00fcr den initialen Prototyp ist eine einfache L\u00f6sung ausreichend",
+      "decisionCriteria": [
+        "Einfachheit",
+        "Keine zus\u00e4tzliche Infrastruktur",
+        "Direktes Arbeiten mit dem definierten JSON-Schema",
+        "Ausreichend f\u00fcr die erwartete Datenmenge"
+      ],
+      "alternatives": [
+        {
+          "name": "SQLite",
+          "description": "Leichtgewichtige relationale Datenbank",
+          "prosCons": {
+            "pros": [
+              "SQL-Support",
+              "ACID-Compliance",
+              "Bessere Performance bei gr\u00f6\u00dferen Datenmengen"
+            ],
+            "cons": [
+              "Zus\u00e4tzliche Abstraktionsschicht",
+              "Schema-Migration n\u00f6tig"
+            ]
+          }
+        },
+        {
+          "name": "MongoDB",
+          "description": "NoSQL Dokumentendatenbank",
+          "prosCons": {
+            "pros": [
+              "Native JSON-Support",
+              "Skalierbar"
+            ],
+            "cons": [
+              "Externe Infrastruktur n\u00f6tig",
+              "\u00dcberdimensioniert f\u00fcr den Use Case"
+            ]
+          }
+        },
+        {
+          "name": "JSON-Datei",
+          "description": "Direkte Speicherung in JSON-Dateien",
+          "prosCons": {
+            "pros": [
+              "Extrem einfach",
+              "Keine Infrastruktur",
+              "Direktes Arbeiten mit Schema",
+              "Versionierbar mit Git"
+            ],
+            "cons": [
+              "Keine Concurrency",
+              "Limitierte Skalierbarkeit",
+              "Ganze Datei muss geladen werden"
+            ]
+          }
+        }
+      ],
+      "decision": "JSON-Dateien werden als Persistenz-L\u00f6sung gew\u00e4hlt f\u00fcr maximale Einfachheit im initialen Prototyp",
+      "relationships": {
+        "qualities": [
+          {
+            "id": "Q-001",
+            "impact": "positive",
+            "rationale": "Sehr schnelle Implementierung m\u00f6glich"
+          },
+          {
+            "id": "Q-004",
+            "impact": "negative",
+            "rationale": "Skaliert nicht gut bei gro\u00dfen Datenmengen"
+          }
+        ],
+        "risks": [
+          {
+            "id": "R-003",
+            "rationale": "Keine Unterst\u00fctzung f\u00fcr gleichzeitige Zugriffe"
+          }
+        ],
+        "technicalDebts": [
+          {
+            "id": "TD-002",
+            "rationale": "Die Persistenz-L\u00f6sung muss sp\u00e4ter durch eine robustere Datenbank ersetzt werden",
+            "intentional": true
+          }
+        ],
+        "components": [
+          {
+            "id": "C-003",
+            "impact": "Definiert die Datenhaltungsschicht",
+            "changeType": "significant"
+          }
+        ],
+        "relatedAdrs": []
+      }
+    }
+  },
+  "qualities": {
+    "Q-001": {
+      "id": "Q-001",
+      "title": "Entwicklungsgeschwindigkeit",
+      "description": "Die Anwendung soll schnell entwickelt und angepasst werden k\u00f6nnen",
+      "metrics": [
+        {
+          "name": "Time to Feature",
+          "description": "Zeit von der Idee bis zur Implementierung",
+          "criteria": "Neue Features sollten innerhalb von Stunden implementierbar sein",
+          "targetValue": "< 4 Stunden f\u00fcr einfache Features"
+        }
+      ],
+      "priority": "high"
+    },
+    "Q-002": {
+      "id": "Q-002",
+      "title": "Benutzerfreundlichkeit",
+      "description": "Die Anwendung soll intuitiv und einfach zu bedienen sein",
+      "metrics": [
+        {
+          "name": "Einarbeitungszeit",
+          "description": "Zeit bis ein neuer Benutzer produktiv arbeiten kann",
+          "criteria": "Neue Benutzer sollten ohne Schulung arbeiten k\u00f6nnen",
+          "targetValue": "< 15 Minuten"
+        }
+      ],
+      "priority": "high"
+    },
+    "Q-003": {
+      "id": "Q-003",
+      "title": "Datenintegrit\u00e4t",
+      "description": "Die Architekturdaten m\u00fcssen valide und konsistent bleiben",
+      "metrics": [
+        {
+          "name": "Validierungsfehler",
+          "description": "Anzahl der Validierungsfehler in gespeicherten Daten",
+          "criteria": "Alle gespeicherten Daten m\u00fcssen dem Schema entsprechen",
+          "targetValue": "0 Validierungsfehler"
+        }
+      ],
+      "priority": "critical"
+    },
+    "Q-004": {
+      "id": "Q-004",
+      "title": "Skalierbarkeit",
+      "description": "Die Anwendung soll mit wachsenden Datenmengen umgehen k\u00f6nnen",
+      "metrics": [
+        {
+          "name": "Response Time",
+          "description": "Antwortzeit bei verschiedenen Datenmengen",
+          "criteria": "Akzeptable Performance bis 1000 ADRs",
+          "targetValue": "< 2 Sekunden Ladezeit"
+        }
+      ],
+      "priority": "medium"
+    }
+  },
+  "risks": {
+    "R-001": {
+      "id": "R-001",
+      "title": "Framework-Abh\u00e4ngigkeit",
+      "description": "Starke Abh\u00e4ngigkeit von einem relativ neuen Framework (FastAPI)",
+      "impact": "medium",
+      "likelihood": "low",
+      "mitigationStrategy": "Verwendung von Standard-Python und ASGI-kompatiblen Komponenten",
+      "status": "accepted"
+    },
+    "R-002": {
+      "id": "R-002",
+      "title": "UI-Limitierungen",
+      "description": "Streamlit bietet begrenzte Customisierungsm\u00f6glichkeiten",
+      "impact": "low",
+      "likelihood": "high",
+      "mitigationStrategy": "Akzeptanz der Limitierungen f\u00fcr den Prototyp, sp\u00e4tere Migration m\u00f6glich",
+      "status": "accepted"
+    },
+    "R-003": {
+      "id": "R-003",
+      "title": "Keine Concurrency-Unterst\u00fctzung",
+      "description": "JSON-Dateien unterst\u00fctzen keine gleichzeitigen Zugriffe",
+      "impact": "high",
+      "likelihood": "low",
+      "mitigationStrategy": "Einzelbenutzer-Betrieb im Prototyp, Lock-Mechanismus f\u00fcr Produktion",
+      "status": "active"
+    }
+  },
+  "technicalDebts": {
+    "TD-001": {
+      "id": "TD-001",
+      "title": "Limitierte UI-Technologie",
+      "description": "Streamlit k\u00f6nnte f\u00fcr komplexere UI-Anforderungen unzureichend sein",
+      "impact": "medium",
+      "remediationEffort": "high",
+      "remediationPlan": "Migration zu React oder anderem Frontend-Framework bei Bedarf",
+      "status": "active"
+    },
+    "TD-002": {
+      "id": "TD-002",
+      "title": "Einfache Persistenz-L\u00f6sung",
+      "description": "JSON-Dateien sind nicht f\u00fcr Produktionsumgebungen geeignet",
+      "impact": "high",
+      "remediationEffort": "medium",
+      "remediationPlan": "Migration zu SQLite oder PostgreSQL f\u00fcr Produktion",
+      "status": "active"
+    }
+  },
+  "components": {
+    "C-001": {
+      "id": "C-001",
+      "title": "API Layer",
+      "responsibility": "Bereitstellung der REST-API f\u00fcr CRUD-Operationen auf Architekturdaten",
+      "interfaces": [
+        {
+          "name": "Architecture API",
+          "description": "REST-API f\u00fcr Architekturdaten",
+          "type": "provided"
+        }
+      ],
+      "attributes": {
+        "technology": "FastAPI",
+        "deployment": "Python ASGI Server"
+      }
+    },
+    "C-002": {
+      "id": "C-002",
+      "title": "User Interface",
+      "responsibility": "Benutzeroberfl\u00e4che f\u00fcr die Verwaltung von Architekturbeziehungen",
+      "interfaces": [
+        {
+          "name": "Web UI",
+          "description": "Browser-basierte Benutzeroberfl\u00e4che",
+          "type": "provided"
+        },
+        {
+          "name": "API Client",
+          "description": "Konsumiert die Architecture API",
+          "type": "required"
+        }
+      ],
+      "attributes": {
+        "technology": "Streamlit",
+        "deployment": "Streamlit Server"
+      }
+    },
+    "C-003": {
+      "id": "C-003",
+      "title": "Data Layer",
+      "responsibility": "Persistierung und Validierung der Architekturdaten",
+      "interfaces": [
+        {
+          "name": "Data Service",
+          "description": "Service f\u00fcr Datenzugriff und -validierung",
+          "type": "provided"
+        }
+      ],
+      "attributes": {
+        "technology": "JSON Files + jsonschema",
+        "deployment": "Local filesystem"
+      }
+    },
+    "C-004": {
+      "id": "C-004",
+      "title": "AsciiDoc Generator",
+      "responsibility": "Generierung von AsciiDoc-Dokumenten aus JSON-Daten",
+      "interfaces": [
+        {
+          "name": "Generator API",
+          "description": "API zur Dokumentengenerierung",
+          "type": "provided"
+        }
+      ],
+      "attributes": {
+        "technology": "Jinja2 Templates",
+        "deployment": "Part of API Layer"
+      }
+    }
+  }
+}

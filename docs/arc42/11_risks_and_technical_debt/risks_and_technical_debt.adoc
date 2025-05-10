@@ -1,0 +1,51 @@
+= Risiken und technische Schulden
+
+== Risiken
+
+=== R-001: Framework-Abhängigkeit
+
+Starke Abhängigkeit von einem relativ neuen Framework (FastAPI)
+
+* *Auswirkung*: medium
+* *Eintrittswahrscheinlichkeit*: low
+* *Status*: accepted
+* *Mitigationsstrategie*: Verwendung von Standard-Python und ASGI-kompatiblen Komponenten
+
+=== R-002: UI-Limitierungen
+
+Streamlit bietet begrenzte Customisierungsmöglichkeiten
+
+* *Auswirkung*: low
+* *Eintrittswahrscheinlichkeit*: high
+* *Status*: accepted
+* *Mitigationsstrategie*: Akzeptanz der Limitierungen für den Prototyp, spätere Migration möglich
+
+=== R-003: Keine Concurrency-Unterstützung
+
+JSON-Dateien unterstützen keine gleichzeitigen Zugriffe
+
+* *Auswirkung*: high
+* *Eintrittswahrscheinlichkeit*: low
+* *Status*: active
+* *Mitigationsstrategie*: Einzelbenutzer-Betrieb im Prototyp, Lock-Mechanismus für Produktion
+
+== Technische Schulden
+
+=== TD-001: Limitierte UI-Technologie
+
+Streamlit könnte für komplexere UI-Anforderungen unzureichend sein
+
+* *Auswirkung*: medium
+* *Behebungsaufwand*: high
+* *Status*: active
+* *Behebungsplan*: Migration zu React oder anderem Frontend-Framework bei Bedarf
+
+=== TD-002: Einfache Persistenz-Lösung
+
+JSON-Dateien sind nicht für Produktionsumgebungen geeignet
+
+* *Auswirkung*: high
+* *Behebungsaufwand*: medium
+* *Status*: active
+* *Behebungsplan*: Migration zu SQLite oder PostgreSQL für Produktion
+

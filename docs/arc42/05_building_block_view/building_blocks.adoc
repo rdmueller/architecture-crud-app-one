@@ -1,0 +1,108 @@
+= Bausteinsicht
+
+== Ebene 1: Systemübersicht
+
+[plantuml, building-blocks-level1, svg]
+....
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(user, "Benutzer")
+
+System_Boundary(system, "Architecture CRUD Application") {
+    Container(ui, "User Interface", "Streamlit", "Web-basierte Benutzeroberfläche")
+    Container(api, "API Layer", "FastAPI", "REST API für CRUD-Operationen")
+    Container(data, "Data Layer", "Python", "Datenverwaltung und Validierung")
+    Container(generator, "Generator", "Jinja2", "AsciiDoc-Generierung")
+}
+
+ContainerDb(storage, "JSON Storage", "File System", "Persistierte Architekturdaten")
+
+Rel(user, ui, "Verwendet")
+Rel(ui, api, "Sendet Anfragen")
+Rel(api, data, "Verwendet")
+Rel(api, generator, "Verwendet")
+Rel(data, storage, "Liest/Schreibt")
+@enduml
+....
+
+== Ebene 2: API Layer
+
+[plantuml, building-blocks-level2-api, svg]
+....
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Container_Boundary(api, "API Layer") {
+    Component(adr_endpoints, "ADR Endpoints", "FastAPI Router", "CRUD für ADRs")
+    Component(quality_endpoints, "Quality Endpoints", "FastAPI Router", "CRUD für Qualitätsanforderungen")
+    Component(risk_endpoints, "Risk Endpoints", "FastAPI Router", "CRUD für Risiken")
+    Component(component_endpoints, "Component Endpoints", "FastAPI Router", "CRUD für Komponenten")
+    Component(export_endpoints, "Export Endpoints", "FastAPI Router", "Dokumentengenerierung")
+    Component(validator, "Request Validator", "Pydantic", "Validiert API-Anfragen")
+}
+
+Rel(adr_endpoints, validator, "Nutzt")
+Rel(quality_endpoints, validator, "Nutzt")
+Rel(risk_endpoints, validator, "Nutzt")
+Rel(component_endpoints, validator, "Nutzt")
+@enduml
+....
+
+== Ebene 2: Data Layer
+
+[plantuml, building-blocks-level2-data, svg]
+....
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Container_Boundary(data, "Data Layer") {
+    Component(repository, "Architecture Repository", "Python Class", "Datenzugriffs-Interface")
+    Component(schema_validator, "Schema Validator", "jsonschema", "Validiert gegen JSON-Schema")
+    Component(file_handler, "File Handler", "Python", "Low-level Dateizugriff")
+    Component(models, "Domain Models", "Pydantic", "Datenmodelle")
+}
+
+Rel(repository, schema_validator, "Verwendet")
+Rel(repository, file_handler, "Verwendet")
+Rel(repository, models, "Verwendet")
+@enduml
+....
+
+== Baustein-Beschreibungen
+
+=== User Interface (Streamlit)
+**Zweck**: Bereitstellung einer intuitiven Web-Oberfläche für die Verwaltung von Architekturbeziehungen
+
+**Verantwortlichkeiten**:
+* Darstellung der Architekturdaten in verschiedenen Ansichten
+* Formulare für CRUD-Operationen
+* Visualisierung von Beziehungen
+* Export-Trigger für AsciiDoc-Generierung
+
+=== API Layer (FastAPI)
+**Zweck**: RESTful API für alle Operationen auf Architekturdaten
+
+**Verantwortlichkeiten**:
+* Bereitstellung von CRUD-Endpunkten
+* Request-Validierung
+* Response-Formatierung
+* Fehlerbehandlung
+
+=== Data Layer
+**Zweck**: Verwaltung der Datenpersistenz und -validierung
+
+**Verantwortlichkeiten**:
+* Laden und Speichern von JSON-Daten
+* Schema-Validierung
+* Datenmodell-Management
+* Transaktionale Operationen
+
+=== Generator
+**Zweck**: Erzeugung von AsciiDoc-Dokumentation aus JSON-Daten
+
+**Verantwortlichkeiten**:
+* Template-Verwaltung
+* Daten-zu-AsciiDoc-Transformation
+* Dateiexport
+* Formatierung und Strukturierung

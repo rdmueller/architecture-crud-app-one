@@ -1,0 +1,34 @@
+= Architecture CRUD Application - Architekturdokumentation
+:toc: left
+:toclevels: 3
+:numbered:
+:sectnums:
+:source-highlighter: highlightjs
+
+== Über dieses Dokument
+
+Diese Dokumentation beschreibt die Architektur der Architecture CRUD Application unter Verwendung des arc42-Templates.
+
+include::01_introduction_and_goals/introduction_goals.adoc[leveloffset=+1]
+
+include::02_constraints/constraints.adoc[leveloffset=+1]
+
+include::03_system_scope_and_context/context.adoc[leveloffset=+1]
+
+include::04_solution_strategy/solution_strategy.adoc[leveloffset=+1]
+
+include::05_building_block_view/building_blocks.adoc[leveloffset=+1]
+
+include::06_runtime_view/runtime_view.adoc[leveloffset=+1]
+
+include::07_deployment_view/deployment_view.adoc[leveloffset=+1]
+
+include::08_cross_cutting_concepts/crosscutting_concepts.adoc[leveloffset=+1]
+
+include::09_architecture_decisions/architecture_decisions.adoc[leveloffset=+1]
+
+include::10_quality_requirements/quality_requirements.adoc[leveloffset=+1]
+
+include::11_risks_and_technical_debt/risks_and_technical_debt.adoc[leveloffset=+1]
+
+include::12_glossary/glossary.adoc[leveloffset=+1]

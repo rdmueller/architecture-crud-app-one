@@ -1,0 +1,124 @@
+= Laufzeitsicht
+
+== Szenario: ADR erstellen
+
+[plantuml, runtime-create-adr, svg]
+....
+@startuml
+actor User
+participant "Streamlit UI" as UI
+participant "FastAPI" as API
+participant "Repository" as Repo
+participant "Validator" as Val
+database "JSON File" as DB
+
+User -> UI: Füllt ADR-Formular aus
+UI -> API: POST /api/adrs
+API -> Val: Validiere Request
+Val -> API: Validation OK
+API -> Repo: create_adr(adr_data)
+Repo -> Val: Validiere gegen Schema
+Val -> Repo: Validation OK
+Repo -> DB: Lade existierende Daten
+DB -> Repo: JSON-Daten
+Repo -> Repo: Füge neues ADR hinzu
+Repo -> DB: Speichere aktualisierte Daten
+DB -> Repo: Erfolg
+Repo -> API: ADR erstellt
+API -> UI: 201 Created
+UI -> User: Zeige Erfolgsmeldung
+@enduml
+....
+
+== Szenario: Beziehungen visualisieren
+
+[plantuml, runtime-visualize, svg]
+....
+@startuml
+actor User
+participant "Streamlit UI" as UI
+participant "FastAPI" as API
+participant "Repository" as Repo
+participant "Visualizer" as Viz
+database "JSON File" as DB
+
+User -> UI: Wählt "Beziehungen anzeigen"
+UI -> API: GET /api/relationships
+API -> Repo: get_all_relationships()
+Repo -> DB: Lade JSON-Daten
+DB -> Repo: JSON-Daten
+Repo -> Repo: Extrahiere Beziehungen
+Repo -> API: Beziehungsdaten
+API -> UI: JSON Response
+UI -> Viz: Erstelle Visualisierung
+Viz -> UI: Graph/Matrix
+UI -> User: Zeige Visualisierung
+@enduml
+....
+
+== Szenario: AsciiDoc exportieren
+
+[plantuml, runtime-export, svg]
+....
+@startuml
+actor User
+participant "Streamlit UI" as UI
+participant "FastAPI" as API
+participant "Repository" as Repo
+participant "Generator" as Gen
+participant "Templates" as Tmpl
+database "JSON File" as DB
+
+User -> UI: Klickt "Export AsciiDoc"
+UI -> API: POST /api/export/asciidoc
+API -> Repo: get_all_data()
+Repo -> DB: Lade JSON-Daten
+DB -> Repo: JSON-Daten
+Repo -> API: Architekturdaten
+API -> Gen: generate_asciidoc(data)
+Gen -> Tmpl: Lade Templates
+Tmpl -> Gen: Template-Dateien
+Gen -> Gen: Rendere Templates mit Daten
+Gen -> API: AsciiDoc-Dateien
+API -> UI: ZIP-Datei
+UI -> User: Download startet
+@enduml
+....
+
+== Fehlerbehandlung
+
+[plantuml, runtime-error, svg]
+....
+@startuml
+actor User
+participant "Streamlit UI" as UI
+participant "FastAPI" as API
+participant "Repository" as Repo
+participant "Validator" as Val
+
+User -> UI: Sendet ungültige Daten
+UI -> API: POST /api/adrs (invalid)
+API -> Val: Validiere Request
+Val -> API: Validation Error
+API -> UI: 400 Bad Request\n+ Fehlermeldung
+UI -> User: Zeige Validierungsfehler
+
+User -> UI: Korrigierte Daten
+UI -> API: POST /api/adrs (valid)
+API -> Val: Validiere Request
+Val -> API: Validation OK
+API -> Repo: create_adr(adr_data)
+Repo -> Val: Validiere gegen Schema
+Val -> Repo: Schema Validation Error
+Repo -> API: Schema-Fehler
+API -> UI: 422 Unprocessable Entity\n+ Schema-Fehler
+UI -> User: Zeige Schema-Fehler
+@enduml
+....
+
+== Performance-Überlegungen
+
+* **Caching**: JSON-Daten werden im Speicher gecacht, um wiederholtes Laden zu vermeiden
+* **Lazy Loading**: Große Datenmengen werden nur bei Bedarf vollständig geladen
+* **Pagination**: Listen-Ansichten unterstützen Pagination für bessere Performance
+* **Asynchrone Operationen**: FastAPI nutzt async/await für nicht-blockierende I/O

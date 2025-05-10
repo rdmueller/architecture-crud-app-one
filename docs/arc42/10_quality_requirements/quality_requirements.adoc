@@ -1,0 +1,51 @@
+= Qualitätsanforderungen
+
+[cols="1,3,1", options="header"]
+|===
+| ID | Qualitätsanforderung | Priorität
+| Q-001 | Entwicklungsgeschwindigkeit | high
+| Q-002 | Benutzerfreundlichkeit | high
+| Q-003 | Datenintegrität | critical
+| Q-004 | Skalierbarkeit | medium
+|===
+
+== Q-001: Entwicklungsgeschwindigkeit
+
+Die Anwendung soll schnell entwickelt und angepasst werden können
+
+=== Metriken
+
+* *Time to Feature*: Zeit von der Idee bis zur Implementierung
+  ** Kriterium: Neue Features sollten innerhalb von Stunden implementierbar sein
+  ** Zielwert: < 4 Stunden für einfache Features
+
+== Q-002: Benutzerfreundlichkeit
+
+Die Anwendung soll intuitiv und einfach zu bedienen sein
+
+=== Metriken
+
+* *Einarbeitungszeit*: Zeit bis ein neuer Benutzer produktiv arbeiten kann
+  ** Kriterium: Neue Benutzer sollten ohne Schulung arbeiten können
+  ** Zielwert: < 15 Minuten
+
+== Q-003: Datenintegrität
+
+Die Architekturdaten müssen valide und konsistent bleiben
+
+=== Metriken
+
+* *Validierungsfehler*: Anzahl der Validierungsfehler in gespeicherten Daten
+  ** Kriterium: Alle gespeicherten Daten müssen dem Schema entsprechen
+  ** Zielwert: 0 Validierungsfehler
+
+== Q-004: Skalierbarkeit
+
+Die Anwendung soll mit wachsenden Datenmengen umgehen können
+
+=== Metriken
+
+* *Response Time*: Antwortzeit bei verschiedenen Datenmengen
+  ** Kriterium: Akzeptable Performance bis 1000 ADRs
+  ** Zielwert: < 2 Sekunden Ladezeit
+
