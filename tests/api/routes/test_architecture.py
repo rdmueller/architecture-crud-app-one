@@ -9,9 +9,9 @@ import sys
 src_path = Path(__file__).parent.parent.parent.parent / "src"
 sys.path.insert(0, str(src_path))
 
-from api.main import app
-from data.repository import ArchitectureRepository
-from api.models.architecture import Architecture
+from src.api.main import app
+from src.data.repository import ArchitectureRepository
+from src.api.models.architecture import Architecture
 from tests.api.conftest import mock_repo, mock_validator
 
 client = TestClient(app)

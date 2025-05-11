@@ -1,0 +1,14 @@
+{
+  "metadata": {
+    "title": "Architecture",
+    "system": "system",
+    "version": "1.0.0",
+    "date": "2025-05-11",
+    "authors": []
+  },
+  "adrs": {},
+  "qualities": {},
+  "risks": {},
+  "technicalDebts": {},
+  "components": {}
+}

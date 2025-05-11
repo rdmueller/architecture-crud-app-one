@@ -2,6 +2,7 @@
 import shutil
 import os
 import sys
+import json
 
 # Add src to path
 sys.path.insert(0, 'src')
@@ -16,9 +17,18 @@ def initialize_example_data():
     if os.path.exists(working_file):
         with open(working_file, 'r') as f:
             content = f.read().strip()
-            if content and content != "{}":
-                print(f"Working data file already exists and has content: {working_file}")
-                return
+            if content:
+                try:
+                    data = json.loads(content)
+                    # Check if the file has actual content (not just empty structures)
+                    if (data.get("adrs") and len(data.get("adrs")) > 0 and
+                        data.get("qualities") and len(data.get("qualities")) > 0):
+                        print(f"Working data file already exists and has content: {working_file}")
+                        return
+                    else:
+                        print(f"Working data file exists but has no entities. Initializing with example data.")
+                except json.JSONDecodeError:
+                    print(f"Working data file exists but is not valid JSON. Initializing with example data.")
     
     # Copy example data
     if os.path.exists(example_file):

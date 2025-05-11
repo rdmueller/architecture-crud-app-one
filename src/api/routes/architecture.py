@@ -14,6 +14,11 @@ async def get_architecture(
     repo: ArchitectureRepository = Depends(get_repository)
 ) -> Dict[str, Any]:
     """Get complete architecture data."""
+    print("Architecture route called")
     data = repo.load()
-    # data is already an Architecture object
-    return data.model_dump()
+    print(f"Architecture route: ADRs: {len(data.adrs)}, Qualities: {len(data.qualities)}")
+    
+    # Convert to dict and return
+    result = data.model_dump(mode='json')
+    print(f"Architecture route returning: ADRs: {len(result.get('adrs', {}))}, Qualities: {len(result.get('qualities', {}))}")
+    return result

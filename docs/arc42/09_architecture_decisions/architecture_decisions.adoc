@@ -216,3 +216,148 @@ JSON-Dateien werden als Persistenz-Lösung gewählt für maximale Einfachheit im
 | R-003 | Keine Unterstützung für gleichzeitige Zugriffe
 |===
 
+== ADR-004: Flexible Datenmodelle
+*Status*: accepted
+*Datum*: 2025-05-11
+*Autoren*: System Architect
+
+=== Kontext und Problemstellung
+Die Anwendung muss mit verschiedenen Datenformaten umgehen können, da sich das JSON-Schema im Laufe der Zeit weiterentwickelt hat und verschiedene Clients unterschiedliche Formate verwenden können.
+
+=== Entscheidungskriterien
+* Abwärtskompatibilität mit älteren Datenformaten
+* Robustheit gegenüber Variationen im Schema
+* Einfache Erweiterbarkeit
+* Gute Fehlerbehandlung
+
+=== Betrachtete Alternativen
+
+==== Strikte Validierung
+Strikte Validierung gegen ein festes Schema
+
+*Vorteile:*
+* Garantierte Datenintegrität
+* Klare Fehlermeldungen
+
+*Nachteile:*
+* Keine Abwärtskompatibilität
+* Häufige Schema-Updates nötig
+
+==== Schema-Versionierung
+Mehrere Schemas für verschiedene Versionen
+
+*Vorteile:*
+* Klare Versionierung
+* Gute Abwärtskompatibilität
+
+*Nachteile:*
+* Komplexe Implementierung
+* Viele Konvertierungsfunktionen nötig
+
+==== Flexible Modelle
+Anpassungsfähige Modelle mit Fallbacks und Konvertierungsfunktionen
+
+*Vorteile:*
+* Einfache Implementierung
+* Gute Abwärtskompatibilität
+* Robustheit gegenüber Variationen
+
+*Nachteile:*
+* Potentiell weniger strikte Validierung
+* Komplexere Fehlerbehandlung
+
+=== Entscheidung
+Flexible Modelle werden gewählt, um mit verschiedenen Datenformaten umgehen zu können und Abwärtskompatibilität zu gewährleisten.
+
+=== Beziehungen
+
+.Beeinflusste Qualitätsanforderungen
+[cols="1,1,3", options="header"]
+|===
+| ID | Einfluss | Begründung
+| Q-001 | positive | Ermöglicht schnelle Anpassung an neue Anforderungen
+| Q-002 | positive | Verbessert die Benutzerfreundlichkeit durch Toleranz gegenüber Variationen
+|===
+
+.Erzeugte Risiken
+[cols="1,3", options="header"]
+|===
+| ID | Begründung
+| R-004 | Datenformat-Inkompatibilität kann trotz flexibler Modelle auftreten
+|===
+
+.Erzeugte technische Schulden
+[cols="1,3", options="header"]
+|===
+| ID | Begründung
+| TD-003 | Manuelle Datenkonvertierung zwischen Formaten
+|===
+
+== ADR-005: Robuste Fehlerbehandlung
+*Status*: accepted
+*Datum*: 2025-05-11
+*Autoren*: System Architect
+
+=== Kontext und Problemstellung
+Die Anwendung muss robust mit Fehlern umgehen können, insbesondere bei der Datenvalidierung und API-Kommunikation.
+
+=== Entscheidungskriterien
+* Klare Fehlermeldungen
+* Graceful Degradation
+* Wiederherstellbarkeit
+* Debugging-Unterstützung
+
+=== Betrachtete Alternativen
+
+==== Minimale Fehlerbehandlung
+Nur grundlegende Fehlerbehandlung
+
+*Vorteile:*
+* Einfache Implementierung
+* Weniger Code
+
+*Nachteile:*
+* Schlechte Benutzererfahrung bei Fehlern
+* Schwierige Fehlerdiagnose
+
+==== Umfassende Fehlerbehandlung
+Detaillierte Fehlerbehandlung auf allen Ebenen
+
+*Vorteile:*
+* Bessere Benutzererfahrung
+* Einfachere Fehlerdiagnose
+
+*Nachteile:*
+* Komplexere Implementierung
+* Mehr Code
+
+==== Hybride Fehlerbehandlung
+Fokus auf kritische Pfade mit detaillierter Fehlerbehandlung
+
+*Vorteile:*
+* Gutes Gleichgewicht zwischen Aufwand und Nutzen
+* Fokus auf wichtige Bereiche
+
+*Nachteile:*
+* Ungleichmäßige Abdeckung
+* Potentielle Lücken
+
+=== Entscheidung
+Umfassende Fehlerbehandlung wird gewählt, um eine robuste Anwendung zu gewährleisten und die Fehlerdiagnose zu erleichtern.
+
+=== Beziehungen
+
+.Beeinflusste Qualitätsanforderungen
+[cols="1,1,3", options="header"]
+|===
+| ID | Einfluss | Begründung
+| Q-002 | positive | Verbessert die Benutzerfreundlichkeit durch klare Fehlermeldungen
+| Q-003 | positive | Erhöht die Zuverlässigkeit der Anwendung
+|===
+
+.Erzeugte technische Schulden
+[cols="1,3", options="header"]
+|===
+| ID | Begründung
+| TD-005 | Begrenzte Fehlerprotokollierung, die erweitert werden sollte
+|===

@@ -9,9 +9,9 @@ echo "📦 Initializing example data..."
 python initialize_data.py
 echo ""
 
-# Start API in background
+# Start API in background - using simple version without reload to avoid multiprocessing issues
 echo "🔧 Starting API server on http://localhost:8082..."
-python run_api_with_data.py &
+python run_api_simple.py &
 API_PID=$!
 
 # Wait a bit for API to start

@@ -45,7 +45,7 @@ class Relationships(BaseModel):
 class Interface(BaseModel):
     """Component interface definition."""
     name: str = Field(min_length=3, max_length=100)
-    description: str = Field(min_length=1)
+    description: str = Field(default='Interface description')
     type: str = Field(min_length=1)
 
 

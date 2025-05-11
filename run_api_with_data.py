@@ -18,9 +18,11 @@ os.makedirs("data", exist_ok=True)
 # Run the API
 print("\nStarting API server...")
 import uvicorn
-uvicorn.run(
-    "src.api.main:app",
-    host="0.0.0.0",
-    port=8082,
-    reload=True
-)
+
+if __name__ == "__main__":
+    uvicorn.run(
+        "src.api.main:app",
+        host="0.0.0.0",
+        port=8082,
+        reload=True
+    )

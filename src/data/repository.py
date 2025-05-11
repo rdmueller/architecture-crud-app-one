@@ -39,6 +39,8 @@ class ArchitectureRepository:
     
     def load(self) -> Architecture:
         """Load architecture from file."""
+        print(f"Loading architecture from {self.file_path}")
+        """Load architecture from file."""
         if not os.path.exists(self.file_path):
             return self._default_architecture()
         
@@ -50,7 +52,8 @@ class ArchitectureRepository:
                 
                 data = json.loads(content)
                 return Architecture(**data)
-        except (json.JSONDecodeError, ValueError):
+        except (json.JSONDecodeError, ValueError) as e:
+            print(f"Error loading architecture: {e}")
             return self._default_architecture()
     
     def save(self, architecture: Architecture) -> None:

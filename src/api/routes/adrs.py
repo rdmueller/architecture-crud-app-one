@@ -13,6 +13,7 @@ router = APIRouter()
 async def list_adrs(repo: ArchitectureRepository = Depends(get_repository)) -> List[ADR]:
     """List all ADRs."""
     architecture = repo.load()
+    print(f"ADRs route: Found {len(architecture.adrs)} ADRs")
     return list(architecture.adrs.values())
 
 

@@ -36,6 +36,7 @@ class ADRRelationship(BaseModel):
 
 
 class Relationships(BaseModel):
+    model_config = ConfigDict(extra='allow')
     """Collection of all relationships for an entity."""
     qualities: List[QualityRelationship] = Field(default_factory=list)
     risks: List[RiskRelationship] = Field(default_factory=list)

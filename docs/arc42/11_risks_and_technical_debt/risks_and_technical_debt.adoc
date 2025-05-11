@@ -29,6 +29,24 @@ JSON-Dateien unterstützen keine gleichzeitigen Zugriffe
 * *Status*: active
 * *Mitigationsstrategie*: Einzelbenutzer-Betrieb im Prototyp, Lock-Mechanismus für Produktion
 
+=== R-004: Datenformat-Inkompatibilität
+
+Unterschiedliche Datenformate zwischen Beispieldaten und Modellen können zu Validierungsfehlern führen
+
+* *Auswirkung*: high
+* *Eintrittswahrscheinlichkeit*: medium
+* *Status*: mitigated
+* *Mitigationsstrategie*: Flexible Modelle mit Unterstützung für verschiedene Datenformate, Konvertierungsfunktionen
+
+=== R-005: Multiprocessing-Probleme
+
+Uvicorn's Reload-Funktion kann zu Multiprocessing-Problemen führen
+
+* *Auswirkung*: medium
+* *Eintrittswahrscheinlichkeit*: high
+* *Status*: mitigated
+* *Mitigationsstrategie*: Verwendung von `run_api_simple.py` ohne Reload-Funktion, korrekte Implementierung von `if __name__ == "__main__":`
+
 == Technische Schulden
 
 === TD-001: Limitierte UI-Technologie
@@ -49,3 +67,29 @@ JSON-Dateien sind nicht für Produktionsumgebungen geeignet
 * *Status*: active
 * *Behebungsplan*: Migration zu SQLite oder PostgreSQL für Produktion
 
+=== TD-003: Manuelle Datenkonvertierung
+
+Die Konvertierung zwischen verschiedenen Datenformaten erfolgt manuell
+
+* *Auswirkung*: medium
+* *Behebungsaufwand*: medium
+* *Status*: active
+* *Behebungsplan*: Implementierung einer automatischen Konvertierung zwischen Formaten
+
+=== TD-004: Fehlendes zentrales Konfigurationsmanagement
+
+Konfigurationsparameter sind über verschiedene Dateien verteilt
+
+* *Auswirkung*: low
+* *Behebungsaufwand*: low
+* *Status*: active
+* *Behebungsplan*: Implementierung eines zentralen Konfigurationsmanagements
+
+=== TD-005: Begrenzte Fehlerprotokollierung
+
+Die Fehlerprotokollierung ist auf Debug-Ausgaben beschränkt
+
+* *Auswirkung*: medium
+* *Behebungsaufwand*: low
+* *Status*: active
+* *Behebungsplan*: Implementierung eines umfassenden Logging-Systems

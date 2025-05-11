@@ -25,17 +25,15 @@ def fetch_architecture_data():
         return None
 
 
-def list_to_dict(items: List[Dict[str, Any]]) -> Dict[str, Dict[str, Any]]:
-    """Convert list of items to dictionary keyed by ID."""
-    return {item["id"]: item for item in items} if items else {}
-
-
 def render_dashboard():
+    st.write("Debug mode enabled")
     """Render the dashboard page."""
     st.header("Architecture Overview")
     
     # Fetch architecture data
     data = fetch_architecture_data()
+    if data:
+        st.write(f"Debug - Raw data: {type(data)}")
     
     if data:
         # Extract entities
@@ -44,31 +42,13 @@ def render_dashboard():
         risks = data.get("risks", {})
         technical_debts = data.get("technicalDebts", {})
         components = data.get("components", {})
+        
+        # Debug output
+        st.write(f"Debug - Data received: ADRs: {len(adrs)}, Qualities: {len(qualities)}, Risks: {len(risks)}")
     else:
-        # If no data available, try individual endpoints
-        try:
-            adrs_response = requests.get(f"{API_BASE_URL}/api/adrs")
-            qualities_response = requests.get(f"{API_BASE_URL}/api/qualities")
-            risks_response = requests.get(f"{API_BASE_URL}/api/risks")
-            debts_response = requests.get(f"{API_BASE_URL}/api/technical-debts")
-            components_response = requests.get(f"{API_BASE_URL}/api/components")
-            
-            # Convert lists to dictionaries
-            adrs_list = adrs_response.json() if adrs_response.status_code == 200 else []
-            qualities_list = qualities_response.json() if qualities_response.status_code == 200 else []
-            risks_list = risks_response.json() if risks_response.status_code == 200 else []
-            technical_debts_list = debts_response.json() if debts_response.status_code == 200 else []
-            components_list = components_response.json() if components_response.status_code == 200 else []
-            
-            # Convert to dictionaries
-            adrs = list_to_dict(adrs_list)
-            qualities = list_to_dict(qualities_list)
-            risks = list_to_dict(risks_list)
-            technical_debts = list_to_dict(technical_debts_list)
-            components = list_to_dict(components_list)
-        except Exception as e:
-            st.error(f"Error connecting to API: {e}")
-            adrs = qualities = risks = technical_debts = components = {}
+        # If no data available, show error
+        st.error("Could not fetch architecture data from API. Please check if the API server is running.")
+        adrs = qualities = risks = technical_debts = components = {}
     
     # Display metrics
     st.markdown("### Key Metrics")
