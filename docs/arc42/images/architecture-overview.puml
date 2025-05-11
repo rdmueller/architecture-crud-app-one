@@ -1,0 +1,26 @@
+@startuml architecture-overview
+!include <C4/C4_Container>
+
+title Container Diagram - Architecture CRUD Application
+
+Person(user, "User", "Manages architecture documentation")
+
+System_Boundary(app, "Architecture CRUD Application") {
+    Container(ui, "Streamlit UI", "Python, Streamlit", "Provides user interface for managing architecture entities")
+    Container(api, "FastAPI Backend", "Python, FastAPI", "REST API for CRUD operations")
+    Container(data, "Data Layer", "Python, Pydantic", "Data models and validation")
+    ContainerDb(storage, "JSON Storage", "File System", "Stores architecture data in JSON format")
+}
+
+Container(doctoolchain, "docToolchain", "Groovy, AsciiDoc", "Generates documentation from architecture data")
+Container(github_pages, "GitHub Pages", "Static Site", "Hosts generated documentation")
+
+Rel(user, ui, "Uses", "HTTPS")
+Rel(ui, api, "Calls", "REST/JSON")
+Rel(api, data, "Uses")
+Rel(data, storage, "Reads/Writes", "JSON")
+Rel(storage, doctoolchain, "Processes", "JSON to AsciiDoc")
+Rel(doctoolchain, github_pages, "Publishes", "HTML/CSS")
+Rel(user, github_pages, "Views", "HTTPS")
+
+@enduml

@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+#
+# This script is the docToolchain wrapper.
+# It helps to install docToolchain and execute docToolchain with the same command
+# and the same parameters in each environment.
+#
+# See https://github.com/docToolchain/docToolchain/releases for available versions.
+# Set DTC_VERSION to the desired version.
+
+DTC_VERSION="v2.0.0"
+DOCKER_IMAGE="doctoolchain/doctoolchain:${DTC_VERSION}"
+MAIN_CONFIG_FILE="docToolchainConfig.groovy"
+
+# Make script executable
+chmod +x "$0"
+
+echo "docToolchain Wrapper $DTC_VERSION"
+echo ""
+
+# Check if Docker is available
+if command -v docker &> /dev/null; then
+    echo "Docker is available, using dockerized version of docToolchain..."
+    exec docker run --rm -it \
+        -v "${PWD}:/docs" \
+        -v "${PWD}:/project" \
+        -w "/project" \
+        "${DOCKER_IMAGE}" \
+        /bin/bash -c "doctoolchain . $*"
+else
+    echo "Docker is not available. Please install Docker to use docToolchain."
+    echo "Visit https://docs.docker.com/get-docker/ for installation instructions."
+    exit 1
+fi

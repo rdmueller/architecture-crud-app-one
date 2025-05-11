@@ -216,6 +216,44 @@ If you get a port already in use error:
 - API: Change the port in `run_api.py` (default: 8082)
 - UI: Change the port with `streamlit run src/ui/app.py --server.port 8502`
 
+## Documentation
+
+The project documentation is built using docToolchain and published as GitHub Pages.
+
+### Viewing the Documentation
+
+The documentation is automatically published at:
+`https://[your-username].github.io/[repository-name]/`
+
+### Building Documentation Locally
+
+Prerequisites: Docker
+
+```bash
+# Build HTML documentation
+./dtcw generateHTML
+
+# Build microsite for GitHub Pages
+./dtcw generateMicrosite
+```
+
+The generated documentation will be in the `build/` directory.
+
+### Documentation Structure
+
+- `docs/arc42/` - Architecture documentation following arc42 template
+- `docs/specification/` - Application specifications
+- Progress reports and guides
+
+### Automatic Publishing
+
+Documentation is automatically published to GitHub Pages when:
+- Changes are pushed to the `main` branch
+- Changes affect files in the `docs/` directory
+- Changes affect the docToolchain configuration
+
+See `docs/README.md` for more details about the documentation.
+
 ## License
 
 This project is licensed under the MIT License.

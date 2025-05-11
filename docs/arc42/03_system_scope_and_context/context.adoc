@@ -15,6 +15,7 @@ System(crud_app, "Architecture CRUD Application", "Verwaltung von Architekturbez
 
 System_Ext(file_system, "Dateisystem", "Speichert JSON-Dateien")
 System_Ext(browser, "Web Browser", "Anzeige der Benutzeroberfläche")
+System_Ext(github_pages, "GitHub Pages", "Hostet generierte Dokumentation")
 
 Rel(architect, crud_app, "Verwaltet ADRs, Risiken, etc.")
 Rel(developer, crud_app, "Liest Architekturinfos")
@@ -22,10 +23,14 @@ Rel(pm, crud_app, "Überwacht Risiken")
 
 Rel(crud_app, file_system, "Speichert/lädt JSON")
 Rel(browser, crud_app, "Zeigt UI an")
+Rel(crud_app, github_pages, "Publiziert Dokumentation")
 @enduml
 ....
 
 == Technischer Kontext
+
+.Architecture Overview
+image::images/architecture-overview.png[Architecture Overview, width=100%]
 
 [plantuml, technical-context, svg]
 ....
@@ -41,11 +46,15 @@ Container_Boundary(crud_app, "Architecture CRUD Application") {
 }
 
 ContainerDb(json_files, "JSON Files", "Dateisystem", "Architekturdaten")
+Container_Ext(doctoolchain, "docToolchain", "Groovy/Docker", "Dokumentationsgenerierung")
+Container_Ext(github_pages, "GitHub Pages", "Static Site", "Dokumentationshosting")
 
 Rel(user, ui, "Nutzt", "HTTPS")
 Rel(ui, api, "Ruft auf", "HTTP/REST")
 Rel(api, data, "Verwendet")
 Rel(data, json_files, "Liest/Schreibt")
+Rel(json_files, doctoolchain, "Verarbeitet")
+Rel(doctoolchain, github_pages, "Publiziert")
 @enduml
 ....
 
@@ -57,4 +66,19 @@ Rel(data, json_files, "Liest/Schreibt")
 | Web Browser | Benutzerinteraktion mit der Anwendung | HTTP/HTTPS
 | Dateisystem | Persistierung der JSON-Daten | OS File I/O
 | Export | AsciiDoc-Generierung | File Export
+| GitHub Actions | Automatisierte Dokumentationserstellung | CI/CD
+| GitHub Pages | Hosting der generierten Dokumentation | Static Site Hosting
+| docToolchain | Transformation von AsciiDoc zu HTML | Docker Container
 |===
+
+=== Systemintegration
+
+Die Architecture CRUD Application ist in ein größeres Ökosystem integriert:
+
+* **Entwicklungsumgebung**: Lokale Python-Installation für Entwicklung und Test
+* **Versionskontrolle**: GitHub für Quellcode und Dokumentation
+* **CI/CD Pipeline**: GitHub Actions für automatisierte Builds und Deployments
+* **Dokumentationsplattform**: GitHub Pages für öffentlich zugängliche Dokumentation
+* **Container-Plattform**: Docker Hub für docToolchain-Images
+
+Diese Integration ermöglicht einen nahtlosen Workflow von der Entwicklung bis zur Veröffentlichung der Dokumentation.

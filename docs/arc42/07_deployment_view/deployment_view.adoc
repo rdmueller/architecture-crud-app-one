@@ -22,10 +22,26 @@ Deployment_Node(user_machine, "Benutzer-Rechner", "Windows/Linux/macOS") {
     }
 }
 
+Deployment_Node(github, "GitHub", "Cloud") {
+    Deployment_Node(actions, "GitHub Actions", "CI/CD") {
+        Container(doctoolchain, "docToolchain", "Docker", "Dokumentationsgenerierung")
+    }
+    Deployment_Node(pages, "GitHub Pages", "Static Hosting") {
+        Container(docs_site, "Documentation Site", "HTML/CSS/JS", "Generierte Dokumentation")
+    }
+}
+
 Rel(web_ui, app, "HTTP/HTTPS", "Port 8501/8000")
 Rel(app, json_storage, "File I/O")
+Rel(json_storage, doctoolchain, "Prozessiert")
+Rel(doctoolchain, docs_site, "Publiziert")
 @enduml
 ....
+
+== Detailliertes Deployment-Diagramm
+
+.Deployment Architecture
+image::images/deployment-diagram.png[Deployment Diagram, width=100%]
 
 == Deployment-Varianten
 
@@ -40,10 +56,14 @@ Rel(app, json_storage, "File I/O")
 **Start-Kommandos**:
 ```bash
 # FastAPI starten
-uvicorn main:app --reload --port 8000
+python run_api.py
+# oder mit Dateninitialisierung
+python run_api_with_data.py
 
-# Streamlit starten
-streamlit run app.py --server.port 8501
+# Streamlit starten (in separatem Terminal)
+python run_ui_with_data.py
+# oder manuell
+streamlit run src/ui/app.py
 ```
 
 === Variante 2: Docker-Container
@@ -58,22 +78,51 @@ streamlit run app.py --server.port 8501
 version: '3.8'
 services:
   api:
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile.api
     ports:
-      - "8000:8000"
+      - "8082:8082"
     volumes:
       - ./data:/app/data
-    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    environment:
+      - ARCHITECTURE_DATA_FILE=/app/data/architecture.json
   
   ui:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.ui  
     ports:
       - "8501:8501"
-    volumes:
-      - ./data:/app/data
-    command: streamlit run app.py --server.port 8501
     depends_on:
       - api
+    environment:
+      - API_URL=http://api:8082
+```
+
+=== Variante 3: Dokumentations-Pipeline
+
+**Komponenten**:
+* GitHub Repository
+* GitHub Actions Workflow
+* docToolchain (Docker Container)
+* GitHub Pages
+
+**Workflow**:
+1. Entwickler pusht Änderungen
+2. GitHub Actions triggert
+3. docToolchain generiert Dokumentation
+4. Dokumentation wird auf GitHub Pages deployed
+
+```yaml
+# .github/workflows/publish-docs.yml
+name: Publish Documentation
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'docToolchainConfig.groovy'
 ```
 
 == Infrastruktur-Anforderungen
@@ -84,8 +133,10 @@ services:
 | CPU | 2+ Cores | Parallele Verarbeitung von UI und API
 | RAM | 4 GB minimum | Python-Prozesse und Daten-Caching
 | Speicher | 1 GB | Anwendung + JSON-Daten
-| Netzwerk | Port 8000, 8501 | API und UI Zugriff
+| Netzwerk | Port 8082, 8501 | API und UI Zugriff
 | OS | Windows/Linux/macOS | Python-Kompatibilität
+| Docker | Optional | Für containerisiertes Deployment
+| Internet | Erforderlich | Für GitHub Pages und Dependencies
 |===
 
 == Sicherheitsüberlegungen
@@ -94,6 +145,8 @@ services:
 * **Dateizugriff**: Beschränkt auf konfiguriertes Datenverzeichnis
 * **Authentifizierung**: Keine (nur für lokalen/internen Gebrauch)
 * **HTTPS**: Optional über Reverse-Proxy konfigurierbar
+* **GitHub Pages**: Öffentlich zugängliche Dokumentation
+* **Secrets Management**: Umgebungsvariablen für sensible Konfiguration
 
 == Skalierungsoptionen
 
@@ -103,3 +156,20 @@ Für zukünftige Erweiterungen:
 2. **Vertikal**: Mehr CPU/RAM für größere Datenmengen
 3. **Datenbank**: Migration von JSON zu echtem Datenbanksystem
 4. **Caching**: Redis für Session-Management und Caching
+5. **CDN**: Für statische Assets und Dokumentation
+6. **Container-Orchestrierung**: Kubernetes für komplexere Deployments
+
+== Monitoring und Logging
+
+* **Anwendungslogs**: Strukturierte Logs via Python logging
+* **Access Logs**: FastAPI/Uvicorn Access-Logs
+* **Error Tracking**: Exception-Handling mit Stack-Traces
+* **GitHub Actions**: Build- und Deployment-Logs
+* **Healthchecks**: `/health` Endpoint für Monitoring
+
+== Backup und Recovery
+
+* **Daten-Backup**: Regelmäßige Sicherung der JSON-Dateien
+* **Versionskontrolle**: Git für Code und Dokumentation
+* **Disaster Recovery**: Wiederherstellung aus Git + Backup
+* **Rollback**: Über Git Tags und Releases

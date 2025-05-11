@@ -1,0 +1,134 @@
+= Architecture CRUD Application Documentation
+:toc: left
+:toclevels: 3
+:icons: font
+:source-highlighter: highlightjs
+
+== Welcome
+
+Welcome to the Architecture CRUD Application documentation. This application helps manage architectural relationships between Architecture Decision Records (ADRs), Quality Requirements, Risks, Technical Debts, and Components.
+
+== Quick Links
+
+* link:arc42/architecture-documentation-complete.html[Architecture Documentation (arc42)]
+* link:specification/crud-app-specification.html[Application Specification]
+* link:https://github.com/[your-username]/architecture-crud-app[GitHub Repository]
+
+== Features
+
+* **CRUD Operations**: Create, Read, Update, and Delete all entity types
+* **Relationship Management**: Define and manage relationships between entities
+* **JSON-based Storage**: Simple file-based persistence
+* **REST API**: Full REST API with automatic OpenAPI documentation
+* **Streamlit UI**: Modern, responsive user interface
+* **Type Safety**: Built with FastAPI and Pydantic for full type safety
+* **Export**: Export to JSON and AsciiDoc formats
+
+== Getting Started
+
+[source,bash]
+----
+# Clone the repository
+git clone https://github.com/[your-username]/architecture-crud-app.git
+cd architecture-crud-app
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Start the application
+python run_api_with_data.py  # Terminal 1
+python run_ui_with_data.py   # Terminal 2
+----
+
+The API will be available at http://localhost:8082 and the UI at http://localhost:8501.
+
+== Documentation Overview
+
+=== Architecture Documentation
+
+The link:arc42/architecture-documentation-complete.html[Architecture Documentation] follows the arc42 template and includes:
+
+* Introduction and Goals
+* Architecture Constraints
+* System Scope and Context
+* Solution Strategy
+* Building Block View
+* Runtime View
+* Deployment View
+* Cross-cutting Concepts
+* Architecture Decisions
+* Quality Requirements
+* Risks and Technical Debt
+* Glossary
+
+=== Specification
+
+The link:specification/crud-app-specification.html[Application Specification] contains:
+
+* Functional Requirements
+* Technical Architecture
+* API Design
+* UI Design
+* Data Model
+* Implementation Plan
+
+=== Progress Reports
+
+* link:phase3-progress.html[Phase 3: Streamlit UI]
+* link:phase4-progress.html[Phase 4: Test-Driven Frontend Development]
+* link:phase5-progress.html[Phase 5: Advanced Testing]
+* link:phase6-progress.html[Phase 6: Integration & Deployment]
+
+=== Guides
+
+* link:INSTALLATION.html[Installation Guide]
+* link:UI_TESTING.html[UI Testing Guide]
+* link:TROUBLESHOOTING.html[Troubleshooting Guide]
+* link:GITHUB_PAGES_SETUP.html[GitHub Pages Setup]
+
+== Development
+
+=== Project Structure
+
+[source]
+----
+architecture-crud-app/
+├── src/
+│   ├── api/          # FastAPI Backend
+│   ├── data/         # Data Models and Repository
+│   ├── ui/           # Streamlit Frontend
+│   └── json/         # JSON Schema
+├── tests/            # Test Suite
+├── docs/             # Documentation
+└── data/             # JSON Data Storage
+----
+
+=== Testing
+
+[source,bash]
+----
+# Run backend tests
+pytest tests/api tests/data -v
+
+# Run frontend tests
+python run_ui_tests_simple.py
+
+# Run all tests with coverage
+pytest --cov=src --cov-report=html
+----
+
+== Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests
+5. Submit a pull request
+
+== License
+
+This project is licensed under the MIT License.
+
+== Contact
+
+For questions or support, please open an issue on GitHub.

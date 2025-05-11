@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  doctoolchain:
+    image: doctoolchain/doctoolchain:v2.0.0
+    volumes:
+      - .:/project
+    working_dir: /project
+    user: "1000:1000"
+    environment:
+      - HOME=/tmp
+    command: ./dtcw generateMicrosite
+    
+  preview:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./build/microsite:/usr/share/nginx/html:ro
+    depends_on:
+      - doctoolchain
+    
+  # Optional: Live reload for development
+  live-reload:
+    image: doctoolchain/doctoolchain:v2.0.0
+    volumes:
+      - .:/project
+    working_dir: /project
+    user: "1000:1000"
+    environment:
+      - HOME=/tmp
+    command: sh -c "while true; do ./dtcw generateHTML; sleep 5; done"
+    profiles:
+      - dev

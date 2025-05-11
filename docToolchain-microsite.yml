@@ -1,0 +1,48 @@
+# Microsite configuration for docToolchain
+# This file configures the structure and appearance of the generated microsite
+
+site:
+  title: "Architecture CRUD Application"
+  description: "Documentation for managing architectural relationships"
+  baseUrl: "/architecture-crud-app/"
+  
+navigation:
+  - title: "Home"
+    url: "index.html"
+  - title: "Architecture"
+    url: "arc42/architecture-documentation-complete.html"
+  - title: "Specification"
+    url: "specification/crud-app-specification.html"
+  - title: "Guides"
+    items:
+      - title: "Installation"
+        url: "INSTALLATION.html"
+      - title: "UI Testing"
+        url: "UI_TESTING.html"
+      - title: "Troubleshooting"
+        url: "TROUBLESHOOTING.html"
+  - title: "Progress"
+    items:
+      - title: "Phase 3: UI"
+        url: "phase3-progress.html"
+      - title: "Phase 4: Testing"
+        url: "phase4-progress.html"
+      - title: "Phase 5: Advanced"
+        url: "phase5-progress.html"
+      - title: "Phase 6: Integration"
+        url: "phase6-progress.html"
+
+theme:
+  name: "default"
+  colors:
+    primary: "#2E86AB"
+    secondary: "#A23B72"
+    accent: "#4F8A10"
+  
+footer:
+  copyright: "© 2025 Architecture CRUD Application"
+  links:
+    - title: "GitHub"
+      url: "https://github.com/[your-username]/architecture-crud-app"
+    - title: "Issues"
+      url: "https://github.com/[your-username]/architecture-crud-app/issues"

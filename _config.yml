@@ -1,0 +1,4 @@
+# Jekyll configuration for GitHub Pages
+theme: jekyll-theme-minimal
+title: Architecture CRUD Application
+description: Documentation for the Architecture CRUD Application

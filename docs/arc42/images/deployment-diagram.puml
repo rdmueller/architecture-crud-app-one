@@ -1,0 +1,40 @@
+@startuml deployment-diagram
+!include <C4/C4_Deployment>
+
+title Deployment Diagram - Architecture CRUD Application
+
+Deployment_Node(dev_machine, "Developer Machine", "Local Development") {
+    Deployment_Node(python_env, "Python Environment", "Python 3.9+") {
+        Container(api_local, "FastAPI API", "Python")
+        Container(ui_local, "Streamlit UI", "Python")
+    }
+    Deployment_Node(fs_local, "File System", "Local Storage") {
+        Container(json_local, "JSON Files", "*.json")
+    }
+}
+
+Deployment_Node(github, "GitHub", "Cloud Platform") {
+    Deployment_Node(repo, "Git Repository", "Version Control") {
+        Container(source_code, "Source Code", "Python, AsciiDoc")
+        Container(docs, "Documentation", "AsciiDoc, Markdown")
+    }
+    Deployment_Node(actions, "GitHub Actions", "CI/CD") {
+        Container(doctoolchain_ci, "docToolchain", "Docker")
+    }
+    Deployment_Node(pages, "GitHub Pages", "Static Hosting") {
+        Container(website, "Documentation Site", "HTML, CSS, JS")
+    }
+}
+
+Deployment_Node(docker_hub, "Docker Hub", "Container Registry") {
+    Container(doctoolchain_image, "docToolchain Image", "Docker")
+}
+
+Rel(api_local, json_local, "Reads/Writes")
+Rel(ui_local, api_local, "Calls")
+Rel(source_code, actions, "Triggers")
+Rel(actions, doctoolchain_image, "Pulls")
+Rel(doctoolchain_ci, docs, "Processes")
+Rel(doctoolchain_ci, website, "Deploys")
+
+@enduml
